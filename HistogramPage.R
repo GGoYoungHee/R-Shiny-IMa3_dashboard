@@ -3,6 +3,7 @@ library(readxl)
 library(tidyverse)
 
 
+
 ui<-fluidPage(
   titlePanel("Make a Histogram for IMa3 Result"),
   
@@ -12,11 +13,13 @@ ui<-fluidPage(
       fileInput("file","Select your file"),
       selectInput('sep','Separator',c(Comma=',',Semicolon=";",Tab="\t",Xls="xls"),','),
       
+      
       # select columns
       selectInput('group_col',label=h3("Group column"),c("",Q_columns='Q',M_columns='M',T_columns='T'),selected = NULL,multiple = FALSE),
       checkboxGroupInput("combobox",label=h3("column for histogram"),choices=NULL),
       downloadButton(outputId = "download",label="Download the Plot")
     ),
+    
     
     mainPanel(
       uiOutput("tb")
@@ -45,16 +48,16 @@ server<-function(input,output,session){
     q.vec<-c()
     m.vec<-c()
     t.vec<-c()
-  
+    
     
     for (ch in ch_col){
       if (str_detect(ch,'q')){q.vec<-c(q.vec,ch)}
       if (str_detect(ch,'m')){m.vec<-c(m.vec,ch)}
       if (str_detect(ch,'t')) {t.vec<-c(t.vec,ch)}
     }
-    #cat('q: ',q.vec,'\n')
-    #cat('m: ',m.vec,'\n')
-    #cat('t: ',t.vec,'\n')
+    cat('q: ',q.vec,'\n')
+    cat('m: ',m.vec,'\n')
+    cat('t: ',t.vec,'\n')
     
     if (input$group_col=='Q'){
       updateCheckboxGroupInput(session,"combobox",choices=q.vec)
@@ -65,33 +68,77 @@ server<-function(input,output,session){
     else if(input$group_col=='T'){
       updateCheckboxGroupInput(session,"combobox",choices=t.vec)
     }
+  
     dataSet
   })
-  
-  output$table<-renderTable({
-    if (is.null(input$group_col)){return ()}
-    data()
+
+  new.df<-reactive({
+    test<-list()
+    for (i in 1:length(input$combobox)){
+      n<-which(colnames(data())==input$combobox[i])
+      test[[input$combobox[i]]]<-c(n,n+1)
+    }
+    new.df<-data.frame(data()[,unname(unlist(test))])  
+    new.df
   })
+  
   
   
   output$myplot <-renderPlot({
-      if (is.null(input$combobox)){
-        plot.new()
-      }    
-      # 일변량
-      else if (length(input$combobox==1)){
-        #print("one variable...!")
-        q_loc=which(colnames(data())==input$combobox)
-        x<-data()[,c(q_loc,q_loc+1)]
-        plot(x,type='l',ylab='Density')
-      }
+    # Group columns 미 선택시 하얀 바탕만 보이기
+    if (is.null(input$combobox)){
+      plot.new()
+    }    
     
-      # 다변량
-      else if (length(input$combobox)>1){
-        return()
+
+    else{
+      x.min=100 ; x.max=0 ; y.min=100 ; y.max=0
+      
+      for (col in 1:length(new.df())){
+        # 홀수번째 컬럼 : x축
+        if (col %%2==1){
+          if (x.min > min(new.df()[col])){
+            x.min<-min(new.df()[col])
+          }
+          if(x.max<max(new.df()[col])){
+            x.max<-max(new.df()[col])
+          }
+          
+          
+        }
+        
+        # 짝수번째 컬럼 : y축
+        else{
+          if (y.min > min(new.df()[col])){
+            y.min<-min(new.df()[col])
+          }
+          if (y.max < max(new.df()[col])){
+            y.max<-max(new.df()[col])
+          }
+        }
       }
-    })
-    
+      
+      
+      # 그래프 그리기
+      
+      plot.col<-1:8 # 그래프 색상 지정 순서
+      
+      for (col in 1:length(new.df())){
+        # 홀수번째 컬럼: x축
+        if (col%%2==1){
+          if (col==1){
+            
+            plot(new.df()[,c(col,col+1)],xlim=c(x.min,x.max),ylim=c(y.min,y.max),type='l',xlab=input$group_col,ylab='Density')
+          }
+          else{
+            lines(new.df()[,c(col,col+1)],col=plot.col[(col+1)%/%2])
+          }
+        }
+      }
+      legend('topright',input$combobox,col=plot.col[1:length(input$combobox)],lty=1)
+      
+    }
+  })
   
   output$tb <-renderUI({
     if(is.null(data()))
@@ -99,6 +146,7 @@ server<-function(input,output,session){
     else
       tabsetPanel(tabPanel("data",tableOutput("table")),tabPanel("Histogram",plotOutput("myplot")))
   })
+
   
   output$download <-downloadHandler(
     filename=function(){paste("histogram_",input$combobox,".png",setp="")},
@@ -111,6 +159,5 @@ server<-function(input,output,session){
     }
   )
 }
-
 
 shinyApp(ui=ui,server = server)
