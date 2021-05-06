@@ -55,9 +55,7 @@ server<-function(input,output,session){
       if (str_detect(ch,'m')){m.vec<-c(m.vec,ch)}
       if (str_detect(ch,'t')) {t.vec<-c(t.vec,ch)}
     }
-    cat('q: ',q.vec,'\n')
-    cat('m: ',m.vec,'\n')
-    cat('t: ',t.vec,'\n')
+  
     
     if (input$group_col=='Q'){
       updateCheckboxGroupInput(session,"combobox",choices=q.vec)
