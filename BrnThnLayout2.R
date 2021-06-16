@@ -2,8 +2,8 @@ library(shiny)
 library(shinydashboard)
 library(reticulate)
 
-source_python('C:/Users/rhtn2/OneDrive/¹ÙÅÁ È­¸é/¿¬±¸Á¶±³/02. Rshiny project/IMa3_BrnThn-master/IMa3_BrnThn-master/[Pycharm] IMa3_BrnThn.py')
-source_python('C:/Users/rhtn2/OneDrive/¹ÙÅÁ È­¸é/¿¬±¸Á¶±³/02. Rshiny project/IMa3_BrnThn-master/IMa3_BrnThn-master/[Pycharm] IMa3_BrnThn2.py')
+source_python('C:/Users/rhtn2/OneDrive/ë°”íƒ• í™”ë©´/ì—°êµ¬ì¡°êµ/02. Rshiny project/IMa3_BrnThn-master/IMa3_BrnThn-master/[Pycharm] IMa3_BrnThn.py')
+source_python('C:/Users/rhtn2/OneDrive/ë°”íƒ• í™”ë©´/ì—°êµ¬ì¡°êµ/02. Rshiny project/IMa3_BrnThn-master/IMa3_BrnThn-master/[Pycharm] IMa3_BrnThn2.py')
 
 
 
@@ -50,14 +50,3 @@ server <- function(input, output){
 }
 shinyApp(ui, server)
 
-
-
-'''
-  eventReactive(input$gobutton,{
-BrnThn(input_dir = input_dir, out_dir =out_dir ,Brn=100, Thn=2)
-})
-## test
-# file_dic <- 'C:/Users/rhtn2/OneDrive/¹ÙÅÁ È­¸é/¿¬±¸Á¶±³/02. Rshiny project/300_sym_OSK_recom_IMa3_run6_2.out (1).ti'
-# BrnThn(input_dir = file_dic, out_dir ='C:/Users/rhtn2/OneDrive/¹ÙÅÁ È­¸é/¿¬±¸Á¶±³/02. Rshiny project/Brn10.out.ti' ,Brn=10)
-
-'''
