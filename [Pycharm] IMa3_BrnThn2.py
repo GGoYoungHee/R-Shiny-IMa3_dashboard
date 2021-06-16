@@ -37,11 +37,3 @@ BrnThn('D:/KGU_Labs_BayesianRandom/300_sym_OSK_recom_IMa3_run6_2.out.ti','D:/KGU
 # No brun-in. Only 10 Thining
 BrnThn('D:/KGU_Labs_BayesianRandom/300_sym_OSK_recom_IMa3_run6_2.out.ti','D:/KGU_Labs_BayesianRandom/OnlyThn10.out.ti',Thn=10)
 '''
-'''
-input_file=open('C:/Users/rhtn2/OneDrive/바탕 화면/연구조교/02. Rshiny project/300_sym_OSK_recom_IMa3_run6_2.out (1).ti')
-valuestart=0
-while True:
-        line=input_file.readline()
-        valuestart+=1
-        if line=='VALUESSTART\n': break
-'''
