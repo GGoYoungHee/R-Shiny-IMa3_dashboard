@@ -2,9 +2,7 @@
 
 ## Test version.
 
-- MainPageLayout
-  - Main Page, Brn&Thn page, Histogram Page 
-
-- HistPage
-  - 다변량일때의 플랏 수정 완료!
-
+- Home
+- plot
+- Brun & Thin
+- About Us
