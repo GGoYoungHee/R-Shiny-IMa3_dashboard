@@ -5,10 +5,11 @@ library(shinyFiles)
 
 
 # load the python script to run this page 
-source_python('./[Pycharm] IMa3_BrnThn2.py') # uiÆú´õ¿¡ À§Ä¡ 
+source_python('./[Pycharm] IMa3_BrnThn2.py') # uií´ë”ì— ìœ„ì¹˜ 
 
 
-ui <- fluidPage(
+bt <- tabPanel(fluidPage("Brn-Thn", value='bt', 
+                         
   # Title setting 
   titlePanel('Burn-in & Thinning'),
   
@@ -52,4 +53,5 @@ ui <- fluidPage(
       
     )
   )
+)
 )
