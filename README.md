@@ -20,7 +20,7 @@ ex) setwd("C:/Users/rhtn2/OneDrive/Documents//IMa3_Making-Histogram-main")
 ### How to run
 1. From the code download button(green button), store the zip file and unzip it to the desired location.
 2. Run the script 'test_navbar.R' in the 'IMa3_Making-Histogram' folder.
-3. In the script 'test_navbar.R', set the working directory as the 'IMa3_Making-Histogram' folder path through the setwd('') function.
+3. In the script 'test_navbar.R', set the working directory as the 'IMa3_Making-Histogram' folder path through the setwd('') function.  
 ex) setwd("C:/Users/rhtn2/OneDrive/Documents//IMa3_Making-Histogram-main")
 4. Run the entire script 'test_navbar.R'.
 
