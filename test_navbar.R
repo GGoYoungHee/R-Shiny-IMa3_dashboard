@@ -9,6 +9,7 @@ library(shinythemes)
 source("func.R")
 source("tabs/ui/home.R",local=T)
 source("tabs/ui/plot.R",local=T)
+source("tabs/ui/bt.R",local=T)
 
 
 ui<-fluidPage(
@@ -22,15 +23,17 @@ ui<-fluidPage(
                # tabs
                home,
                plot,
+               bt,              
                #tabPanel("PLOT",value='plot',hr(),plotOutput('myplot')),
                #tabPanel("PLOT",plotOutput('myplot'),value='plot'),
-               tabPanel("BRUN&THIN",value='bt'),
+               #tabPanel("BRUN&THIN",value='bt'),
                tabPanel("ABOUT US",value='about')
                ))
 
 server<-function(input,output,session){
   source("tabs/server/home.R",local=T)
   source("tabs/server/plot.R",local=T)
+  source("tabs/server/bt.R",local=T)
   
 }
 
