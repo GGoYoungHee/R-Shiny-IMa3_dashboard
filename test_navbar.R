@@ -1,15 +1,16 @@
-setwd("C:/Users/koh99/ë°”íƒ• í™”ë©´/Labs_KGU/IMa3")
+#setwd("C:/Users/koh99/ë°”íƒ• ?™”ë©?/Labs_KGU/IMa3")
 getwd()
 library(shiny)
-
-
-
 library(shinythemes)
+#install.packages('shinythemes')
+
 # file load
 source("func.R")
 source("tabs/ui/home.R",local=T)
 source("tabs/ui/plot.R",local=T)
+source("tabs/ui/bt.R",local=T)
 
+#install.packages('shinyFiles')
 
 ui<-fluidPage(
   navbarPage(title="HELLO!!",
@@ -22,15 +23,17 @@ ui<-fluidPage(
                # tabs
                home,
                plot,
+               bt,              
                #tabPanel("PLOT",value='plot',hr(),plotOutput('myplot')),
                #tabPanel("PLOT",plotOutput('myplot'),value='plot'),
-               tabPanel("BRUN&THIN",value='bt'),
+               #tabPanel("BRUN&THIN",value='bt'),
                tabPanel("ABOUT US",value='about')
                ))
 
 server<-function(input,output,session){
   source("tabs/server/home.R",local=T)
   source("tabs/server/plot.R",local=T)
+  source("tabs/server/bt.R",local=T)
   
 }
 
@@ -41,20 +44,20 @@ shinyApp(ui,server)
 
 '''
 ì§ˆë¬¸
-1. HELLO ê°€ì œ ëŒ€ì‹  ì›¹ í˜ì´ì§€ ì´ë¦„ì´ í•„ìš”í•´ìš”!
-2. í˜ì´ì§€ ìƒì„¸ ì„¤ëª… í•„ìš”í•´ìš”!
+1. HELLO ê°€? œ ??€?‹  ?›¹ ?˜?´ì§€ ?´ë¦„ì´ ?•„?š”?•´?š”!
+2. ?˜?´ì§€ ?ƒ?„¸ ?„¤ëª? ?•„?š”?•´?š”!
 '''
 
 '''
-ë³´ì™„ì 
-1. tabpanel uië¶€ë¶„ ì¶©ëŒ  ---í•´ê²°...! (í›„ ì›ì¸ ì°¾ê¸° í˜ë“¤ì—ˆë”°...^_^)
-  -> ì¶©ëŒë¬¸ì œ ì•„ë‹ˆê³  html ë¬¸ì œì˜€ìŒ
-2. plot íƒ­ ë¶€ë¶„ ë°ì´í„° ë³€ê²½ìœ¼ë¡œ ì¸í•œ ì½”ë“œ ë³€ê²½
-3. plot íƒ­: download ë²„íŠ¼ pdf ~~ ë­ ê¸°íƒ€ ë“±ë“±ìœ¼ë¡œ ì„ íƒ ê°€ëŠ¥í•˜ê²Œ
+ë³´ì™„? 
+1. tabpanel uië¶€ë¶? ì¶©ëŒ  ---?•´ê²?...! (?›„ ?›?¸ ì°¾ê¸° ?˜?“¤?—ˆ?”°...^_^)
+  -> ì¶©ëŒë¬¸ì œ ?•„?‹ˆê³? html ë¬¸ì œ??€?Œ
+2. plot ?ƒ­ ë¶€ë¶? ?°?´?„° ë³€ê²½ìœ¼ë¡? ?¸?•œ ì½”ë“œ ë³€ê²?
+3. plot ?ƒ­: download ë²„íŠ¼ pdf ~~ ë­? ê¸°í?€ ?“±?“±?œ¼ë¡? ?„ ?ƒ ê°€?Š¥?•˜ê²?
 '''
 
 
-# ì•ˆì— ìˆëŠ” ë‚´ìš©ì€ ë˜‘ê°™ìŒ
+# ?•ˆ?— ?ˆ?Š” ?‚´?š©??€ ?˜‘ê°™ìŒ
 # 
 
 

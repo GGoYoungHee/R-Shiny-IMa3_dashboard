@@ -3,8 +3,8 @@
 
 # change Tabs
 observeEvent(input$plot,{
-  #updateNavbarPage(session=session,inputId='navbar',selected='plot')
-  updateTabsetPanel(session=session,inputId='navbar',selected='plot')
+  updateNavbarPage(session=session,inputId='navbar',selected='plot')
+  #updateTabsetPanel(session=session,inputId='navbar',selected='plot')
   #output$myplot<-renderPlot(hist(1:10))
   #output$myplot<-renderPlot(hist(1:10))
 })

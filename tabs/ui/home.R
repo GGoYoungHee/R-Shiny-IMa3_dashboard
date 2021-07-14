@@ -5,14 +5,16 @@ home<-tabPanel(title='HOME',
                br(), br(),
                #HTML("<h1> <center> WELCOME! <b>hello!!<b> WEBPAGE </center> </h1>"), 
                p('WELCOME!',strong("HELLO!!"),'WEBPAGE.'),
-               # ì´ê±° html ì´ ì•„ë‹ˆë¼ pë¡œ ë°”ê¾¸ê¸°!!!
-               # ì•„ë‹ˆë©´ columnìœ¼ë¡œ í•˜ë˜ì§€~
+               # ?´ê±? html ?´ ?•„?‹ˆ?¼ pë¡? ë°”ê¾¸ê¸?!!!
+               # ?•„?‹ˆë©? column?œ¼ë¡? ?•˜?˜ì§€~
                
                br(),br(),br(),br(),
                column(width=4,align='center',
                       tab_im(text="Plot",cor=cores[1],id="plot")),
+               
                column(width=4,align='center',
                       tab_im(text="Burn & Thin",cor=cores[2],id="bt")),
+               
                column(width=4,align='center',
                       tab_im(text="About us",cor=cores[3],id="about")),
                
