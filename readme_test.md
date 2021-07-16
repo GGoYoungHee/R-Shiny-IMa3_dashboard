@@ -9,7 +9,7 @@
 ## How to run
 
 
-## About our Dashboard
+## About Dashboard
 
 ### 1. Home
 코드 실행 시 다음과 같은 새 창이 나온다.
