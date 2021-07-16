@@ -7,6 +7,16 @@ R 언어 기반으로 R 4.0.2 버전의 패키지 사용됨.
   
 ## How to run
 1. 본 깃허브 상단의 ![image](https://user-images.githubusercontent.com/77769026/125890089-b55dd5a4-0774-4517-b751-9c7915ca1439.png)를 클릭해 Download ZIP 을 클릭해 파일을 저장하고 원하는 위치에 압축을 푼다.
+2. IMa3_Making-Histogram 폴더의 runApp.R 스크립트를 R studio에서 실행시킨다.
+3. runApp.R 스크립트에서 setwd() 함수를 통해 working directory를 IMa3_Making-Histogram 폴더 경로로 설정한다.
+   ```r
+   # example code
+   setwd("C:/Users/rhtn2/OneDrive/Documents//IMa3_Making-Histogram-main")
+   setwd("C:/Users/Administrator/Desktop/IMa3_Making-Histogram-main")
+   ```
+ 4. runApp.R 스크립트 전체를 실행시킨다.
+ 
+ ** Brun-Thn 페이지 이용을 원할 시 ![image](https://user-images.githubusercontent.com/77769026/125890534-901ed15a-85c3-46b7-927c-2025a27ee15a.png)의 *`open in Browser`* 버튼을 뉼러 웹페이지로 열어야 파일 로드를 실행시킬 수 있다. **
 
 
 ## About Dashboard
