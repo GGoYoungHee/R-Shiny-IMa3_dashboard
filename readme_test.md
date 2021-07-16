@@ -25,7 +25,7 @@
 ![image](https://user-images.githubusercontent.com/77769026/125886478-69e4cf00-3aff-442c-a9c9-fbca8c74fab2.png)
 
 2) 파일 업로드
-왼쪽 상단의 'Select your file' 밑 'Browse' 클릭해 히스토그램으로 만들 IMa3 결과 파일 선택 
+왼쪽 상단의 `*Select your file*' 밑 'Browse' 클릭해 히스토그램으로 만들 IMa3 결과 파일 선택 
 ![image](https://user-images.githubusercontent.com/77769026/125886590-4129f643-205a-49fe-966c-3b513cca7019.png)
 
 3) Group column 선택
