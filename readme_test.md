@@ -6,6 +6,7 @@
 - R 설치 완료 후, R studio 를 다운받아 R 환경 만들기
   -  R studio Desktop Open Source License [다운받기](https://www.rstudio.com/products/rstudio/download/#download)
 ## How to run
+- *`test`*
 
 
 ## About our Dashboard
