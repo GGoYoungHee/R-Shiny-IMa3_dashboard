@@ -11,8 +11,15 @@
 1. 본 깃허브 상단의 ![image](https://user-images.githubusercontent.com/77769026/125890089-b55dd5a4-0774-4517-b751-9c7915ca1439.png)에서 Download ZIP 을 클릭해 파일을 저장하고 원하는 위치에 압축을 푼다.
 2. IMa3_Making-Histogram 폴더의 runApp.R 스크립트를 R studio에서 실행시킨다.</br>
   2-1 runApp.R 을 처음 실행 시킬 때</br>
-  코드 중 
+  : 모든 코드 실행 </br>
   2-2 본 코드를 기존에 실행시켰을 때 </br>
+  : ### install.packages ### 와, ### Miniconda ### 부분은 실행시키지 않는 것 권장. (### library packages ### 부분은 실행해야함.) </br>
+    특히, Miniconda의 경우 다음과 같은 코드는 시간이 오래 걸릴 뿐 만이 아니라 기존에 있다는 에러 반환 (정상적인 에러)
+    ```r
+    install_miniconda()
+    py_install('pandas')
+    ```
+    
 3. runApp.R 스크립트에서 setwd() 함수를 통해 working directory를 IMa3_Making-Histogram 폴더 경로로 설정한다.
    ```r
    # example code 1
