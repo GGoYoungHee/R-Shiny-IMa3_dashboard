@@ -39,5 +39,6 @@ IMa3 결과 파일을 업로드 해 특정 데이터를 히스토그램으로 �
 ### 3. Brun & Thin
 IMa3 결과 파일을 업로드 해 Burn-in 과 Thining 작업 수행</br>
 결과물 파일은 업로드 한 파일과 같은 디렉토리에 자동 저장
+<예시> Burn-in : 10 , Thining : 40 수행하는 b10t40.ti 결과 파일 생성
 ![bt_fin](https://user-images.githubusercontent.com/77769026/125889466-33ae9379-1722-4d66-9178-67342d7fa391.gif)
 
