@@ -10,7 +10,7 @@
 
 ### 1. Home
 ![image](https://user-images.githubusercontent.com/77769026/125884940-64032d20-4526-45b5-b0e7-116b122bf828.png)
-홈페이지 가운데 위치한 파란색, 노랜색, 주황색의 박스를 클릭하면 바로 plot 탭과 Burn&Thin 탭, About us 탭으로 진입할 수 있다.
+홈페이지 가운데 위치한 파란색, 노랜색, 주황색의 박스를 클릭하면 바로 plot 탭과 Burn&Thin 탭, About us 탭으로 진입할 수 있다.</br>
 (상단의 PLOT 탭, Brn-Thin탭, ABOUT US 탭을 클릭해 직접 접근 가능)
 하단에는 이 대시보드에 대한 설명 존재
 
