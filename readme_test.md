@@ -1,5 +1,5 @@
 ## About R
-- **R 4.0.2** 버전을 기반으로 R studio 에서 구현된 코드입니다.
+- **R 4.0.2** 버전을 기반으로 R studio 에서 코드 구현.
 - R과 R studio 설치
 - R 최신 버전 [다운받기](https://cran.r-project.org/bin/windows/base/)
 - R 4.0.2 버전 [다운받기](https://cran.r-project.org/bin/windows/base/old/4.0.2/) : R-4.0.2-win.exe 클릭
@@ -20,6 +20,12 @@
 
 
 ### 2. PLOT
+
+1) PLOT탭 초기 화면
+![image](https://user-images.githubusercontent.com/77769026/125886478-69e4cf00-3aff-442c-a9c9-fbca8c74fab2.png)
+
+2) 파일 업로드
+왼쪽 상단의 Select your file 
 
 
 
