@@ -14,7 +14,7 @@
   2-1 runApp.R 을 처음 실행 시킬 때 : 모든 코드 실행</br>
   2-2 코드를 기존에 실행시켰을 때 또는 r-miniconda가 설치되어 있을 때 </br>
   : ### install.packages ### 와, ### Miniconda ### 부분은 실행시키지 않는 것 권장. (**### library packages ### 부분은 실행**) </br>
-    특히, Miniconda의 경우 다음과 같은 코드는 시간이 오래 걸릴 뿐 만이 아니라 에러 반환 (정상적인 에러)
+    특히, Miniconda의 경우 다음과 같은 코드는 시간이 오래 걸릴 뿐 만이 아니라 에러 반환 (정상적인 에러, 에러 무시하고 진행하기)
 
 3. runApp.R 스크립트에서 setwd() 함수를 통해 working directory를 IMa3_Making-Histogram 폴더 경로로 설정한다.
    ```r
