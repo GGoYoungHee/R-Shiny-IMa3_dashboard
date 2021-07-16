@@ -7,6 +7,8 @@
   -  R studio Desktop Open Source License [다운받기](https://www.rstudio.com/products/rstudio/download/#download)
 
 ## About our Dashboard
+
+### 1. Home
 ![image](https://user-images.githubusercontent.com/77769026/125884940-64032d20-4526-45b5-b0e7-116b122bf828.png)
 
 
