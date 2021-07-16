@@ -11,6 +11,7 @@
 1. 본 깃허브 상단의 ![image](https://user-images.githubusercontent.com/77769026/125890089-b55dd5a4-0774-4517-b751-9c7915ca1439.png)에서 Download ZIP 을 클릭해 파일을 저장하고 원하는 위치에 압축을 푼다.
 2. IMa3_Making-Histogram 폴더의 runApp.R 스크립트를 R studio에서 실행시킨다.</br>
   2-1 runApp.R 을 처음 실행 시킬 때</br>
+  코드 중 
   2-2 본 코드를 기존에 실행시켰을 때 </br>
 3. runApp.R 스크립트에서 setwd() 함수를 통해 working directory를 IMa3_Making-Histogram 폴더 경로로 설정한다.
    ```r
