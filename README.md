@@ -1,6 +1,6 @@
 
 
-**R 언어 기반으로 R 4.0.2 버전의 패키지 사용됨.**
+**R 언어 기반, R 4.0.2 버전의 패키지 사용됨.**
 
 ## About R
 - R 4.0.2 버전 [다운받기](https://cran.r-project.org/bin/windows/base/old/4.0.2/) (최신 버전 [다운](https://cran.r-project.org/bin/windows/base/))
