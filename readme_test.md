@@ -6,6 +6,10 @@
 - R 설치 완료 후, R studio 를 다운받아 코드를 실행하세요.
   -  R studio Desktop Open Source License [다운받기](https://www.rstudio.com/products/rstudio/download/#download)
 
-## Run App
+## About our Dashboard
+
+
+### How to run
+
 
 
