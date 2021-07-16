@@ -11,7 +11,10 @@
 1. 코드 다운로드 버튼(초록)을 통해 코드 zip 파일을 저장하고 원하는 위치에 압축을 푼다.
 2. IMa3_Making-Histogram 폴더의 test_navbar.R 스크립트를 실행시킨다.
 3. test_navbar.R 스크립트에서 setwd('')함수를 통해 working directory를 IMa3_Making-Histogram 폴더 경로로 설정한다.  
-ex) setwd("C:/Users/rhtn2/OneDrive/Documents//IMa3_Making-Histogram-main")
+ex code]
+```r
+setwd("C:/Users/rhtn2/OneDrive/Documents//IMa3_Making-Histogram-main")
+```
 4. test_navbar.R 스크립트 전체를 실행시킨다. 
 
 ** Brn-Thn 페이지 이용을 원할 시 'Open in Brower'버튼을 눌러 웹페이지로 열어야 파일로드를 실행할 수 있다. 
