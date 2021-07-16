@@ -6,7 +6,7 @@ R 언어 기반으로 R 4.0.2 버전의 패키지 사용됨.
   -  R studio Desktop Open Source License [다운받기](https://www.rstudio.com/products/rstudio/download/#download)
   
 ## How to run
-1. 본 깃허브 상단의 ![image](https://user-images.githubusercontent.com/77769026/125890028-7066cecf-fa58-4127-8594-3c9c1081a75e.png)를 클릭해 download zip 확인
+1. 본 깃허브 상단의 ![image](https://user-images.githubusercontent.com/77769026/125890089-b55dd5a4-0774-4517-b751-9c7915ca1439.png)를 클릭해 download zip 확인
 
 
 ## About Dashboard
