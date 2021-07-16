@@ -1,6 +1,6 @@
+- R 언어 기반으로 R 4.0.2 버전의 패키지 사용됨.
+
 ## About R
-- **R 4.0.2** 버전을 기반으로 R studio 에서 코드 구현.
-- R과 R studio 설치
 - R 4.0.2 버전 [다운받기](https://cran.r-project.org/bin/windows/base/old/4.0.2/) (최신 버전 [다운](https://cran.r-project.org/bin/windows/base/))
 - R 설치 완료 후, R studio 를 다운받아 R 환경 만들기
   -  R studio Desktop Open Source License [다운받기](https://www.rstudio.com/products/rstudio/download/#download)
