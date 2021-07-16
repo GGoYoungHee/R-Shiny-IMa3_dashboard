@@ -16,7 +16,7 @@ R 언어 기반으로 R 4.0.2 버전의 패키지 사용됨.
    ```
  4. runApp.R 스크립트 전체를 실행시킨다. (대시보드는 새 창으로 연결)
  
- ** Brun-Thn 페이지 이용을 원할 시 대시보드 창 상단의 ![image](https://user-images.githubusercontent.com/77769026/125890534-901ed15a-85c3-46b7-927c-2025a27ee15a.png)의 *`open in Browser`* 버튼을 뉼러 웹페이지로 열어야 파일 로드를 실행시킬 수 있다. **
+ ** Brun-Thn 페이지 이용을 원할 시 대시보드 창 상단의 ![image](https://user-images.githubusercontent.com/77769026/125890534-901ed15a-85c3-46b7-927c-2025a27ee15a.png)의 *`open in Browser`* 버튼을 눌러 웹페이지로 열어야 파일 로드를 실행시킬 수 있다. **
 
 
 ## About Dashboard
