@@ -1,17 +1,17 @@
 source_python('./tabs/server/IMa3_data.py')
 
 data<-reactive({
-  
+  # file input
   file1<-input$file
   if (is.null(file1)){return()}
   
   dataSet<-ExData(file1$datapath)
   
   
-  # L?? ?????ϴ? ?÷?�� ???ùڽ??? ?? ???�???! -> ¦????° ?÷??? ??��
+  # Extract X-axis data and classify to Group columns
   ch_col<-c()
   col.vec<-colnames(dataSet)
-  #print(col.vec)
+  
   for ( k in 1:length(col.vec)){
     if (k%%2==1){
       ch_col<-c(ch_col,col.vec[k])
@@ -28,9 +28,7 @@ data<-reactive({
     if (str_detect(ch,'m')){m.vec<-c(m.vec,ch)}
     if (str_detect(ch,'t')) {t.vec<-c(t.vec,ch)}
   }
-  cat('q: ',q.vec,'\n')
-  cat('m: ',m.vec,'\n')
-  cat('t: ',t.vec,'\n')
+
   
   if (input$group_col=='Q'){
     updateCheckboxGroupInput(session,"combobox",choices=q.vec)
@@ -45,6 +43,7 @@ data<-reactive({
   dataSet
 })
 
+# data frame for histogram 
 new.df<-reactive({
   
   test<-list()
@@ -62,19 +61,19 @@ new.df<-reactive({
 })
 
 
-
+## Making Histogram ##
 plot_obj <-function(){
-  # Group columns ?? ???ý? ?Ͼ? ???��? ???̱?
   if (is.null(input$combobox)){
     plot.new()
   }    
   
-  
   else{
+    # Set Initial Values
     x.min=100 ; x.max=0 ; y.min=100 ; y.max=0
     
     for (col in 1:length(new.df())){
-      # Ȧ????° ?÷? : x??
+      
+      # X-axis : odd columns 
       if (col %%2==1){
         if (x.min > min(new.df()[col])){
           x.min<-min(new.df()[col])
@@ -86,7 +85,7 @@ plot_obj <-function(){
         
       }
       
-      # ¦????° ?÷? : y??
+      # Y-axis : even columns
       else{
         if (y.min > min(new.df()[col])){
           y.min<-min(new.df()[col])
@@ -98,15 +97,13 @@ plot_obj <-function(){
     }
     
     
-    # ?׷??? ?׸???
-    
-    plot.col<-1:8 # ?׷??? ???? ??�� ????
+    # Set color in Histogram 
+    plot.col<-1:8  
+    # black -> red -> green -> blue -> turquoise -> magenta -> yellow -> gray
     
     for (col in 1:length(new.df())){
-      # Ȧ????° ?÷?: x??
       if (col%%2==1){
         if (col==1){
-          
           plot(new.df()[,c(col,col+1)],xlim=c(x.min,x.max),ylim=c(y.min,y.max),type='l',xlab=input$group_col,ylab='Density')
         }
         else{
@@ -115,7 +112,6 @@ plot_obj <-function(){
       }
     }
     legend('topright',input$combobox,col=plot.col[1:length(input$combobox)],lty=1)
-    
   }
 }
 
@@ -125,14 +121,22 @@ output$table<-renderTable(
   head(data(),15)
 )
 
+## Tab Set : data, Histogram
 output$tb <-renderUI({
   if(is.null(data()))
     h5("No available data yet.")
   else
-    tabsetPanel(tabPanel("data",tableOutput("table")),tabPanel("Histogram",plotOutput("myplot")))
+    tabsetPanel(id='tabSet',
+                tabPanel("data",tableOutput("table")),
+                tabPanel("Histogram",plotOutput("myplot")))
 })
 
+# Update Tab
+observeEvent(length(input$combobox)>0,{
+  updateTabsetPanel(session=session,inputId = 'tabSet',selected='Histogram')
+})
 
+## Histogram Down
 output$download <-downloadHandler(
   filename=function(){paste0("histogram_",input$group_col,".",input$down_opt,setp="")},
   content = function(file){

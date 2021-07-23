@@ -1,10 +1,6 @@
-#library(shiny)
-#library(shinydashboard)
 library(reticulate)
 library(shinyFiles)
 
-# setwd('C:/Users/rhtn2/OneDrive/Documents/연구조교/02. Rshiny project')
-# source_python('./IMa3_BrnThn-master/IMa3_BrnThn-master/[Pycharm] IMa3_BrnThn2.py')
 
 # load the python script to run this page 
 source_python('./tabs/server/[Pycharm] IMa3_BrnThn2.py') 

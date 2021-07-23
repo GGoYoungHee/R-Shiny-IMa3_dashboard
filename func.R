@@ -11,4 +11,11 @@ tab_im <- function(text, cor,id){
 
 #<img src="img/',icon,'">
 
+## origin version ##
 cores <- c("#098ebb", "#fdc23a", "#e96449") #"#818286"
+
+## KGU logo hex ##
+#cores<-cores<-c('#025ab8','#00a053','#ea5504') #06bf66
+
+# dark green
+#ores<-cores<-c('#025ab8','#018c49','#ea5504')

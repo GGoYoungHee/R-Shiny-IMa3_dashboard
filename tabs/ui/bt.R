@@ -1,10 +1,7 @@
-
-# library(shinydashboard)
-# library(reticulate)
 library(shinyFiles)
 
 bt <- tabPanel("Brn-Thn",value='bt',
-  br(),hr(),
+  #br(),hr(),
               
   fluidPage("Brn-Thn", value='bt', 
                          
