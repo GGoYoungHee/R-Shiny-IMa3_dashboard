@@ -17,8 +17,11 @@ bt <- tabPanel("Brn-Thn",value='bt',
       shinyFilesButton("input_dir", "Choose a file" ,
                        title = "Please select a file:", multiple = FALSE,
                        buttonType = "default", class = NULL),
-      
-      
+      #input 파일명 추출
+      br(),
+      h5("Uploaded file:"),
+      verbatimTextOutput("file_name"),
+
       textInput(inputId = 'output_name',
                 label = 'output data name',
                 value='rename.ti'),
@@ -40,8 +43,9 @@ bt <- tabPanel("Brn-Thn",value='bt',
       
     ),
     mainPanel(
-      strong("input data directory : "),
-      textOutput('txt_file'),
+      strong("Output data file : "),
+      #textOutut("text_file"), #input directory
+      textOutput('out_dir'),#output directory
       br(),
       
       span(textOutput('running_mes'), style="color:red")
@@ -50,3 +54,4 @@ bt <- tabPanel("Brn-Thn",value='bt',
   )
 )
 )
+
