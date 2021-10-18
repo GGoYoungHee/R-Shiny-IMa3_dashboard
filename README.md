@@ -2,6 +2,9 @@
 
 **R 언어 기반, R 4.0.2 버전의 패키지 사용됨.**
 
+## update
+- server code 중 plot 코드 수정 : group column 없을 때 오류 메세지 출력 (2021.10.18 - YH)
+
 ## About R
 - R 4.0.2 버전 [다운받기](https://cran.r-project.org/bin/windows/base/old/4.0.2/) (최신 버전 [다운](https://cran.r-project.org/bin/windows/base/))
 - R 설치 완료 후, R studio 를 다운받아 R 환경 만들기
