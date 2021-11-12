@@ -2,6 +2,7 @@
 
 library(shinythemes)
 library(shinyFiles)
+library(shinyWidgets)
 
 mcmc = tabPanel("MCMC",value='mcmc',
             fluidPage("MCMC", value='mcmc', 
@@ -9,19 +10,6 @@ mcmc = tabPanel("MCMC",value='mcmc',
                   
                   sidebarLayout(
                       sidebarPanel(
-                        # CSS를 어떻게 건드려야할지 감이 안옵니다.
-                        tags$head(
-                          tags$style(HTML('
-                            .form-group shiny-input-checkboxgroup shiny-input-container shiny-bound-input {
-                              font-size:50px;
-                              height:10px;
-                            }
-      
-                            .form-group shiny-input-container {
-                              font-size:12.5px;
-                            }
-                        '))),
-                        # CSS 부분 끝.
                           shinyFilesButton("File_input", "Choose a file" ,
                                             title = "Please select a file:", multiple = FALSE,
                                             buttonType = "default", class = NULL, icon(name="file-upload")),
@@ -29,11 +17,18 @@ mcmc = tabPanel("MCMC",value='mcmc',
                           verbatimTextOutput('filechosen'),
                           
                           hr(),
-                          checkboxInput('ViewAll', 'Select all'),
-                          checkboxGroupInput("print_out",label="Select methods",choiceNames =
-                                               list("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
-                                                    "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
-                                             choiceValues = list("TP","DP","CORR","GE","HE","RA"),choices=NULL),
+                          materialSwitch(inputId = 'ViewAll', label = h4('Select all'), value = FALSE, status = "info" ),
+                          # checkboxInput(inputId, label ),
+                          checkboxGroupButtons("print_out",label= h4("Select methods"),choiceNames =
+                                             list("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
+                                                  "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
+                                           choiceValues = list("TP","DP","CORR","GE","HE","RA"),choices=NULL ,
+                                           direction = "vertical", justified = TRUE), # size = 'lg' 매개변수 주면 칸에 안맞음.
+                        
+                          #checkboxGroupInput("print_out",label="Select methods",choiceNames =
+                          #                     list("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
+                          #                          "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
+                          #                   choiceValues = list("TP","DP","CORR","GE","HE","RA"),choices=NULL),
                           # actionButton("go","Run", icon(name="fas fa-play"))
                           
                       ),
@@ -74,8 +69,8 @@ mcmc = tabPanel("MCMC",value='mcmc',
                           tags$h2("Geweke's convergence diagnostic"),
                           tags$p(HTML("A test for equality of the means of the first and last part of \n
                                     a Markov chain (by default the first 10% and the last 50%).")),
-                          column(width=6,sliderInput("GewekeFrac1", "Geweke convergence diagnostic [Frac1] :" , min = 0 , max = 0.5, value = 0.1 )),
-                          column(width=6,sliderInput("GewekeFrac2", "Geweke convergence diagnostic [Frac2] :" , min = 0 , max = 0.5, value = 0.5 )),
+                          column(width=6,sliderInput("GewekeFrac1", "fraction to use from beginning of chain :" , min = 0 , max = 0.5, value = 0.1 )),
+                          column(width=6,sliderInput("GewekeFrac2", "fraction to use from end of chain :" , min = 0 , max = 0.5, value = 0.5 )),
                           verbatimTextOutput('Geweke'),
                           hr(),
                         ),

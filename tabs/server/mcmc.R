@@ -20,7 +20,7 @@ output$filechosen <- renderText({
 
 # all select, unselect button
 observe({
-  updateCheckboxGroupInput(
+  updateCheckboxGroupButtons(
     session, 'print_out', choiceNames =
       list("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
            "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
