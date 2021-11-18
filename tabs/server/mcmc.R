@@ -29,6 +29,12 @@ observe({
   )
 })
 
+# 전부 해제되면 선택 해제되게.
+observe({
+  updateMaterialSwitch(session, 'ViewAll', value = if (length(input$print_out) == 0) {FALSE} else if (length(input$print_out) == 6) {TRUE})
+})
+
+
 # Trace Plot likelihood
 output$TracePlot_LH = renderPlot({
   if(length(input$File_input) <= 1) return({})
