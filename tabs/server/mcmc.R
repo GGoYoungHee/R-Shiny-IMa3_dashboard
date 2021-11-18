@@ -44,10 +44,9 @@ output$TracePlot_LH = renderPlot({
 
 # Trace Plot splitting times
 output$TracePlot_SP = renderPlot({
-  # 값을 안받을때는 공백 플롯을 반환한다.
-  if(length(input$File_input) <= 1) return({}) 
+  if(length(input$File_input) <= 1) return({}) # 값을 안받을때는 공백 반환.
   
-  # 일단 2개는 확정으로 할방법.
+  # 일단 2개는 확정으로 출력.
   layout(matrix(1:(ncol(mcmc_data())-2),ncol(mcmc_data())-2,1))
   counter = 0 # t0, t1계속 증가시키기 위한 카운터터
   for (i in mcmc_data()[,-c(1,2)]) {

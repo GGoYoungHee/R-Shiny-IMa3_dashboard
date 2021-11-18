@@ -18,18 +18,12 @@ mcmc = tabPanel("MCMC",value='mcmc',
                           
                           hr(),
                           materialSwitch(inputId = 'ViewAll', label = h4('Select all'), value = FALSE, status = "info" ),
-                          # checkboxInput(inputId, label ),
                           checkboxGroupButtons("print_out",label= h4("Select methods"),choiceNames =
                                              list("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
                                                   "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
                                            choiceValues = list("TP","DP","CORR","GE","HE","RA"),choices=NULL ,
                                            direction = "vertical", justified = TRUE), # size = 'lg' 매개변수 주면 칸에 안맞음.
-                        
-                          #checkboxGroupInput("print_out",label="Select methods",choiceNames =
-                          #                     list("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
-                          #                          "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
-                          #                   choiceValues = list("TP","DP","CORR","GE","HE","RA"),choices=NULL),
-                          # actionButton("go","Run", icon(name="fas fa-play"))
+
                           
                       ),
                       mainPanel(
@@ -109,11 +103,3 @@ mcmc = tabPanel("MCMC",value='mcmc',
                   )
             )
       )
-
-
-
-
-# icon(name="fab fa-apple") 옵션을 지정하기 위해 등장한 라이브러리.
-# ?icon을 친다음 나오는 링크에서 아이콘 종류 체크 가능. https://fontawesome.com/v5.15/icons?d=gallery&p=2
-# 접속한뒤 아이콘 선택, start using 클릭, <i class="fas fa-angle-double-down"></i>에서 ""안에 내용 참조.
-

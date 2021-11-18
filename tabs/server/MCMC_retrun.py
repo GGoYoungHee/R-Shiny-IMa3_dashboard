@@ -49,15 +49,3 @@ def GetValue(file,readline=2):
     return df
 
 
-
-#ex_time = int(input("input the number of splitting times: "))
-#ex_file = 'E:/조교 작업용/이것도 너프해 보시지/300_sym_OSK_recom_IMa3_run4_7.out (1).ti'
-
-#data = Readti(ex_file)
-#print(data)
-
-#data = GetValue(ex_file,ex_time)
-#print(data)
-
-
-
