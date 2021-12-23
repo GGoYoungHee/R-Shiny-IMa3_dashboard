@@ -5,7 +5,7 @@ home<-tabPanel(title='HOME',
                br(), br(),
                
                p('WELCOME!',strong("HELLO!!"),'WEBPAGE.'),
-              
+               
                
                br(),br(),br(),br(),
                column(width=4,align='center',
@@ -19,6 +19,12 @@ home<-tabPanel(title='HOME',
                
                column(width=12,
                       br(),br(),br(),br(),
-                      wellPanel("This Page is for ~~~. ")))
+                      wellPanel("This Page is for ~~~. ")),
+               
+               
+               column(width=12,align='center',tags$img(src=base64enc::dataURI(file="www/MCMC.jpg", mime="image/png"),height = '500px'))
+               
+               
+)
 
 
