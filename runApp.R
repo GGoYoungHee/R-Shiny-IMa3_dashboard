@@ -26,7 +26,7 @@ source("tabs/ui/mcmc.R",local=T)
 ui<-fluidPage(
   navbarPage(title="HELLO!!",
                id='navbar',
-               theme=shinytheme("superhero"),
+               theme=shinytheme("sandstone"),
                selected='home',
                fluid=T,
                
