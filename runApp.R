@@ -27,6 +27,10 @@ ui<-fluidPage(
   navbarPage(title="HELLO!!",
                id='navbar',
                theme=shinytheme("sandstone"),
+               tags$head(tags$style(HTML('.navbar-static-top {background-color: #2D2D2D;}',
+                                         '.well {background-color: #f0e9df;}',
+                                         '.btn-default .irs--shiny .irs-bar .label-info {background-color: #605d59;}'))),
+
                selected='home',
                fluid=T,
                
@@ -49,5 +53,6 @@ server<-function(input,output,session){
 shinyApp(ui,server)
 
 
-
+#                #tags$head(tags$style(HTML('.navbar-static-top {background-color: #2D2D2D;}',
+#                          '.navbar-default .navbar-nav>.active>a {background-color: #2D2D2D;}'))),
 
