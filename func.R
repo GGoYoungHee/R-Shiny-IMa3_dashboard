@@ -12,4 +12,4 @@ tab_im <- function(text, cor,id){
 #<img src="img/',icon,'">
 
 ## origin version ##
-cores <- c("#2d2d2d", "#098ebb", "#fdc23a", "#e96449", "#D3BBAF", "#ddcdbf", "#e6c26c") # 카이제곱의 "#818286"이 겹쳐서 수정하였음.
+cores <- c("#0A043C", "#098ebb", "#fdc23a", "#e96449", "#D3BBAF", "#ddcdbf", "#e6c26c") # color range

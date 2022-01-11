@@ -27,10 +27,19 @@ ui<-fluidPage(
   navbarPage(title="HELLO!!",
                id='navbar',
                theme=shinytheme("sandstone"),
-               tags$head(tags$style(HTML('.navbar-static-top {background-color: #2D2D2D;}',
+               tags$head(tags$style(HTML('.navbar-static-top {background-color: #334257;}',' .navbar-default { #334257;}',
+                                         '.well {background-color: #F2F1ED;}','.navbar-default .navbar-nav>li>a {color: #ffffff;}',
+                                         '.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, 
+                                         .navbar-default .navbar-nav>.active>a:focus  {background-color: #11324D;}',
+                                         '.btn-default {background-color: #11324D;}',
+                                         '.btn-default.active {background-color: #11324D;}',
+                                         '.btn-default:focus, .btn-default.focus {background-color: #11324D;}',
+                                         '.btn-default:hover {background-color: #11324D;}',
+                                         '.btn-default:active:hover, .btn-default.active:hover, .open>.dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open>.dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open>.dropdown-toggle.btn-default.focus {background-color: #4B6587;}',
+                                         '.btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {background-color: #4B6587;}',
                                          '.well {background-color: #f0e9df;}',
-                                         '.btn-default .irs--shiny .irs-bar .label-info {background-color: #605d59;}'))),
-
+                                         '.btn-default .irs--shiny .irs-bar .label-info {background-color: #F7F6F2;}'))),
+  
                selected='home',
                fluid=T,
                
