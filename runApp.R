@@ -8,7 +8,6 @@ library(shiny)
 library(shinythemes)
 library(reticulate)
 
-
 ### Miniconda ###
 install_miniconda()
 py_install('pandas')
@@ -60,8 +59,3 @@ server<-function(input,output,session){
 }
 
 shinyApp(ui,server)
-
-
-#                #tags$head(tags$style(HTML('.navbar-static-top {background-color: #2D2D2D;}',
-#                          '.navbar-default .navbar-nav>.active>a {background-color: #2D2D2D;}'))),
-
