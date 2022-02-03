@@ -20,6 +20,7 @@ source("tabs/ui/plot.R",local=T)
 source("tabs/ui/bt.R",local=T)
 source("tabs/ui/about.R",local=T)
 source("tabs/ui/mcmc.R",local=T)
+source("tabs/ui/splitting_times.R",local=T)
 
 #### Code ####
 ui<-fluidPage(
@@ -56,6 +57,7 @@ server<-function(input,output,session){
   source("tabs/server/plot.R",local=T)
   source("tabs/server/bt.R",local=T)
   source("tabs/server/mcmc.R",local=T)
+  source("tabs/server/splitting_times.R",local=T)
 }
 
 shinyApp(ui,server)
