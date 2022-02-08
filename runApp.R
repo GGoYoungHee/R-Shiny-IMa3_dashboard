@@ -20,6 +20,7 @@ source("tabs/ui/plot.R",local=T)
 source("tabs/ui/bt.R",local=T)
 source("tabs/ui/about.R",local=T)
 source("tabs/ui/mcmc.R",local=T)
+source("tabs/ui/ct.R",local=T)
 
 #### Code ####
 ui<-fluidPage(
@@ -47,6 +48,7 @@ ui<-fluidPage(
                plot,
                bt,
                mcmc, # NEW CODE
+               ct,
                about
                #tabPanel("ABOUT US",value='about')
                ))
@@ -56,6 +58,7 @@ server<-function(input,output,session){
   source("tabs/server/plot.R",local=T)
   source("tabs/server/bt.R",local=T)
   source("tabs/server/mcmc.R",local=T)
+  source("tabs/server/ct.R",local=T)
 }
 
 shinyApp(ui,server)
