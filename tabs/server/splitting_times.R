@@ -336,7 +336,7 @@ output$ks_t1 <- renderTable({
   
   
 #tab panel
-output$mcmc <- renderUI({
+output$st <- renderUI({
   if(is.null(input$file1) | input$Load==0){
     h5("No available data yet.")
   }

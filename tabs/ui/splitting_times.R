@@ -1,6 +1,6 @@
 #ui
 
-mcmc <- tabPanel("Splitting times",value='mcmc',
+st <- tabPanel("Splitting times",value='st',
     
     fluidPage(
     
@@ -17,7 +17,7 @@ mcmc <- tabPanel("Splitting times",value='mcmc',
             ),
             mainPanel(
                 
-                uiOutput("mcmc")
+                uiOutput("st")
         )
 ))
 )

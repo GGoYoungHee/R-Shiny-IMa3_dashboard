@@ -48,6 +48,7 @@ ui<-fluidPage(
                plot,
                bt,
                mcmc, # NEW CODE
+               st,
                about
                #tabPanel("ABOUT US",value='about')
                ))
