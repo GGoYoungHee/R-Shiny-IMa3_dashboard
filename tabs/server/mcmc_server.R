@@ -19,24 +19,14 @@ output$filechosen <- renderText({
 })
 
 # all select, unselect button
-observeEvent(input$ViewAll, {
-  if (input$ViewAll) {
-    updateCheckboxGroupButtons(
-      session, 'print_out', choiceNames =
-        c("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
-          "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
-      choiceValues = c("TP","DP","CORR","GE","HE","RA"),
-      selected = c("TP","DP","CORR","GE","HE","RA")
-    )
-  } else {
-    updateCheckboxGroupButtons(
-      session, 'print_out', choiceNames =
-        c("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
-          "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
-      choiceValues = c("TP","DP","CORR","GE","HE","RA"),
-      selected = character(0)
-    )
-  }
+observe({
+  updateCheckboxGroupButtons(
+    session, 'print_out', choiceNames =
+      list("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
+           "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
+    choiceValues = list("TP","DP","CORR","GE","HE","RA"),
+    selected = if (input$ViewAll) as.character(list("TP","DP","CORR","GE","HE","RA"))
+  )
 })
 
 # 전부 해제되면 선택 해제되게.

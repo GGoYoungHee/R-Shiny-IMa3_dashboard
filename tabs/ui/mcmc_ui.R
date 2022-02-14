@@ -19,11 +19,13 @@ mcmc = tabPanel("MCMC",value='mcmc',
                           hr(),
                           materialSwitch(inputId = 'ViewAll', label = h4('Select all'), value = FALSE, status = "info" ),
                           checkboxGroupButtons("print_out",label= h4("Select methods"),choiceNames =
-                                             c("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
+                                             list("Trace Plot", "Density Plot", "Autocorrelation and ESS", "Geweke's convergence diagnostic",
                                                   "Heidelberger and Welch's convergence diagnostic", "Raftery and Lewis's diagnostic"),
-                                           choiceValues = c("TP","DP","CORR","GE","HE","RA"),choices=NULL ,
+                                           choiceValues = list("TP","DP","CORR","GE","HE","RA"),choices=NULL ,
                                            direction = "vertical", justified = TRUE), # size = 'lg' 매개변수 주면 칸에 안맞음.
-                      , width = 3),
+
+                          
+                      ),
                       mainPanel(
                         conditionalPanel(
                           condition = "input.print_out.includes('TP')",
@@ -94,10 +96,10 @@ mcmc = tabPanel("MCMC",value='mcmc',
                         or 'stickiness' of the MCMC algorithm.
                         The number of 'burn in' iterations to be discarded at the beginning of the chain is also calculated.")),
                           verbatimTextOutput('Raftery.Lewis'),
-                        )
+                        ),
  
                         # tableOutput("datatable") # TableCheck
-                        , width = 9)
+                      )
                   )
             )
       )

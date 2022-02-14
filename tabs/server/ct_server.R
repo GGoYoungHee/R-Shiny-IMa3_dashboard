@@ -173,11 +173,13 @@ output$table1 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  df1 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df1) <- c("topology","ratio")
-  df1
-},
+  #df1 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  df1 <- data.frame(addmargins(cbind(table(run.afterBT),prop.table(table(run.afterBT)))))
+  colnames(df1) <- c("topology","ratio","sample size")
+  t(df1) 
+  },
   bordered=T)
+  
 
 #plot
 output$plot1 <- renderPlot({
