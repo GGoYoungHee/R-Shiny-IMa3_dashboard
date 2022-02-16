@@ -1,5 +1,5 @@
 ### install packages ###
-list.of.packages<-c('shiny','shinythemes','tidyverse','reticulate','shinyFiles','coda','dplyr','shinyWidgets')
+list.of.packages<-c('shiny','shinythemes','tidyverse','reticulate','shinyFiles','coda','dplyr','shinyWidgets','htmltools')
 new.packages<-list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) {for (i in new.packages) {install.packages(i)}}
 
