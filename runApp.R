@@ -1,7 +1,7 @@
 ### install packages ###
 list.of.packages<-c('shiny','shinythemes','tidyverse','reticulate','shinyFiles','coda','dplyr','shinyWidgets')
 new.packages<-list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) {install.packages(new.packages)}
+if(length(new.packages)) {for (i in new.packages) {install.packages(i)}}
 
 ### library packages ###
 library(shiny)
@@ -11,7 +11,7 @@ library(reticulate)
 ### Miniconda ###
 install_miniconda()
 py_install('pandas')
-
+volumes = c('wd'='.')
 
 ### file load ###
 source("func.R")
@@ -20,7 +20,7 @@ source("tabs/ui/plot_ui.R",local=T)
 source("tabs/ui/bt_ui.R",local=T)
 source("tabs/ui/about_ui.R",local=T)
 source("tabs/ui/mcmc_ui.R",local=T)
-#source("tabs/ui/ct_ui.R",local=T)
+source("tabs/ui/ct_ui.R",local=T)
 source("tabs/ui/splitting_times_ui.R",local=T)
 
 #### Code ####
@@ -50,7 +50,7 @@ ui<-fluidPage(
                bt,
                mcmc, # NEW CODE
                st,
-               #ct,
+               ct,
                about
                #tabPanel("ABOUT US",value='about')
                ))
@@ -60,7 +60,7 @@ server<-function(input,output,session){
   source("tabs/server/plot_server.R",local=T)
   source("tabs/server/bt_server.R",local=T)
   source("tabs/server/mcmc_server.R",local=T)
-  #source("tabs/server/ct_server.R",local=T)
+  source("tabs/server/ct_server.R",local=T)
   source("tabs/server/splitting_times_server.R",local=T)
 }
 

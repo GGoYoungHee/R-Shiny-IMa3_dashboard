@@ -3,7 +3,7 @@ library(data.table)
 library(dplyr)
 
 options(shiny.maxRequestSize=10000*1024^2)
-volumes = c('wd'='.')
+
   
 ## python file load
 source_python('./tabs/server/splitting_times_data.py')
