@@ -25,7 +25,7 @@ mcmc = tabPanel("MCMC",value='mcmc',
                                            direction = "vertical", justified = TRUE), # size = 'lg' 매개변수 주면 칸에 안맞음.
 
                           
-                      ),
+                          width = 3),
                       mainPanel(
                         conditionalPanel(
                           condition = "input.print_out.includes('TP')",
@@ -99,7 +99,7 @@ mcmc = tabPanel("MCMC",value='mcmc',
                         ),
  
                         # tableOutput("datatable") # TableCheck
-                      )
+                        width = 9)
                   )
             )
       )
