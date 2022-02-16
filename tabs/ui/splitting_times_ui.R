@@ -13,7 +13,7 @@ st <- tabPanel("Splitting times",value='st',
                 h4("Uploaded file:"),
                 verbatimTextOutput("summary"),
                 br(),
-                actionButton("Load", "LOAD DATA")
+                actionButton("st_load", "LOAD DATA")
             ),
             mainPanel(
                 
