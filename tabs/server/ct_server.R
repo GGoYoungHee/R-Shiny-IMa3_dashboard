@@ -1,8 +1,6 @@
 #server
 
-library(reticulate)
 library(shinyFiles)
-library(reticulate)
 library(shinyWidgets)
 
 
