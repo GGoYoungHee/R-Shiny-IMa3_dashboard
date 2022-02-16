@@ -13,15 +13,15 @@ options(shiny.maxRequestSize=500*1024^2)
 volumes = c('wd'='.')
 
 
-observe({shinyFileChoose(input, 'file1', roots=volumes, defaultPath='', defaultRoot='wd')})
+observe({shinyFileChoose(input, 'ct_file', roots=volumes, defaultPath='', defaultRoot='wd')})
 
 
-########################## ?É≠Î≥ÑÎ°ú Í∞? ?ç∞?ù¥?Ñ∞ ÏßÄ?†ï ##########################
+########################## ???Î≥ÑÎ°ú ??? ????????? ÏßÄ??? ##########################
 
-lst1 <- eventReactive(input$file1, 
-                      {req(input$Load!=0)
+lst1 <- eventReactive(input$ct_file, 
+                      {req(input$ct_Load!=0)
                         lst <- list( )
-                        file_selected<-parseFilePaths(volumes, input$file1)
+                        file_selected<-parseFilePaths(volumes, input$ct_file)
                         for(i in 1:5){
                           lst[[i]] <- file_selected$datapath[i]
                         }
@@ -29,13 +29,13 @@ lst1 <- eventReactive(input$file1,
                       })
 
 
-##########################  ?ç∞?ù¥?Ñ∞ Î°úÎìú  ##########################
+##########################  ????????? Î°úÎìú  ##########################
 
 run1 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(lst1()[[1]]))
   
-  # burn-thin ?úÑ?ï¥ ?ç∞?ù¥?Ñ∞ ?†ÑÏ≤òÎ¶¨
+  # burn-thin ?????? ????????? ???Ï≤òÎ¶¨
   run1 = scan(text= pop1, what = " ")
   run1 = as.numeric(run1)
   run1
@@ -46,10 +46,10 @@ nrun1 <- reactive({
 })
 
 run2 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(lst1()[[2]]))
   
-  # burn-thin ?úÑ?ï¥ ?ç∞?ù¥?Ñ∞ ?†ÑÏ≤òÎ¶¨
+  # burn-thin ?????? ????????? ???Ï≤òÎ¶¨
   run2 = scan(text= pop1, what = " ")
   run2 = as.numeric(run2)
   run2
@@ -61,10 +61,10 @@ nrun2 <- reactive({
 
 
 run3 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(lst1()[[3]]))
   
-  # burn-thin ?úÑ?ï¥ ?ç∞?ù¥?Ñ∞ ?†ÑÏ≤òÎ¶¨
+  # burn-thin ?????? ????????? ???Ï≤òÎ¶¨
   run3 = scan(text= pop1, what = " ")
   run3 = as.numeric(run3)
   run3
@@ -76,10 +76,10 @@ nrun3 <- reactive({
 
 
 run4 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(lst1()[[4]]))
   
-  # burn-thin ?úÑ?ï¥ ?ç∞?ù¥?Ñ∞ ?†ÑÏ≤òÎ¶¨
+  # burn-thin ?????? ????????? ???Ï≤òÎ¶¨
   run4 = scan(text= pop1, what = " ")
   run4 = as.numeric(run4)
   run4
@@ -91,10 +91,10 @@ nrun4 <- reactive({
 
 
 run5 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(lst1()[[5]]))
   
-  # burn-thin ?úÑ?ï¥ ?ç∞?ù¥?Ñ∞ ?†ÑÏ≤òÎ¶¨
+  # burn-thin ?????? ????????? ???Ï≤òÎ¶¨
   run5 = scan(text= pop1, what = " ")
   run5 = as.numeric(run5)
   run5
@@ -105,23 +105,23 @@ nrun5 <- reactive({
 })
 
 
-########################## ?åå?ùºÎ™? Ï∂úÎ†•?ïòÍ∏? ########################## 
+########################## ????????? Ï∂úÎ†•?????? ########################## 
 
 observe({
   values <- reactiveValues(
     upload_state = NULL
   )
-  observeEvent(input$file1, {
+  observeEvent(input$ct_file, {
     values$upload_state <- 'uploaded'
   })
-  file_selected<-reactive({parseFilePaths(volumes, input$file1)})
+  file_selected<-reactive({parseFilePaths(volumes, input$ct_file)})
   output$summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })
 })
 
 
-########################## Ï≤´Î≤àÏß? ?ç∞?ù¥?Ñ∞  ##########################
+########################## Ï≤´Î≤à??? ?????????  ##########################
 
 #samplesize
 
@@ -213,7 +213,7 @@ output$plot1 <- renderPlot({
 })
 
 
-# Í∑∏Îûò?îÑ ?ã§?ö¥Î°úÎìú
+# Í∑∏Îûò??? ??????Î°úÎìú
 output$downloadct1 <-downloadHandler(
   filename=function(){paste0("traceplot_tab1.",input$ct_down_opt_1,setp="")},
   content = function(filect){
@@ -290,7 +290,7 @@ output$chisq1 <- renderTable({
   cbind(name,t)
   },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
-########################## ?ëêÎ≤àÏß∏ ?ç∞?ù¥?Ñ∞  ########################## 
+########################## ???Î≤àÏß∏ ?????????  ########################## 
 
 #samplesize
 output$sample2 <- renderText({
@@ -378,7 +378,7 @@ output$plot2 <- renderPlot({
 })
 
 
-# Í∑∏Îûò?îÑ ?ã§?ö¥Î°úÎìú
+# Í∑∏Îûò??? ??????Î°úÎìú
 output$downloadct2 <-downloadHandler(
   filename=function(){paste0("traceplot_tab2.",input$ct_down_opt_2,setp="")},
   content = function(filect){
@@ -458,7 +458,7 @@ output$chisq2 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?Ñ∏Î≤àÏß∏ ?ç∞?ù¥?Ñ∞  ########################## 
+########################## ???Î≤àÏß∏ ?????????  ########################## 
 
 #samplesize
 output$sample3 <- renderText({
@@ -624,7 +624,7 @@ output$chisq3 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?Ñ§Î≤àÏß∏ ?ç∞?ù¥?Ñ∞  ########################## 
+########################## ???Î≤àÏß∏ ?????????  ########################## 
 
 #samplesize
 output$sample4 <- renderText({
@@ -790,7 +790,7 @@ output$chisq4 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?ã§?ÑØÎ≤àÏß∏ ?ç∞?ù¥?Ñ∞  ########################## 
+########################## ??????Î≤àÏß∏ ?????????  ########################## 
 
 #samplesize
 output$sample5 <- renderText({
@@ -957,15 +957,15 @@ output$chisq5 <- renderTable({
 
 
 
-#### ?åå?ùºÎ™? Ï∂úÎ†•?ïòÍ∏? 
+#### ????????? Ï∂úÎ†•?????? 
 observe({
   values <- reactiveValues(
     upload_state = NULL
   )
-  observeEvent(input$file1, {
+  observeEvent(input$ct_file, {
     values$upload_state <- 'uploaded'
   })
-  file_selected<-reactive({parseFilePaths(volumes, input$file1)})
+  file_selected<-reactive({parseFilePaths(volumes, input$ct_file)})
   output$summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })

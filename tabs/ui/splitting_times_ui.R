@@ -8,7 +8,7 @@ st <- tabPanel("Splitting times",value='st',
     
         sidebarLayout(
             sidebarPanel(
-                shinyFilesButton('file1', 'SELECT FILE', 'Please select files', multiple=TRUE),
+                shinyFilesButton('st_file', 'SELECT FILE', 'Please select files', multiple=TRUE),
                 br(),
                 h4("Uploaded file:"),
                 verbatimTextOutput("summary"),

@@ -14,22 +14,22 @@ volumes=c('wd'='.')
 
 
 observe({
-  #shinyFileChoose(input, "input_dir",  roots = c(Documents = "C:/Users"), session = session) 이렇게 하면 C:Users에서 시작 
-  #shinyFileChoose(input, "input_dir", roots = volumes, session = session) #,filetype=c('ti') 
-  shinyFileChoose(input, "input_dir", roots=volumes, session = session)  
+  #shinyFileChoose(input, "bt_file",  roots = c(Documents = "C:/Users"), session = session) 이렇게 하면 C:Users에서 시작 
+  #shinyFileChoose(input, "bt_file", roots = volumes, session = session) #,filetype=c('ti') 
+  shinyFileChoose(input, "bt_file", roots=volumes, session = session)  
   })
   
 txt_file <- reactive({
-  if(!is.null(input$input_dir)){
+  if(!is.null(input$bt_file)){
     # browser()
-    file_selected<-parseFilePaths(volumes, input$input_dir)
+    file_selected<-parseFilePaths(volumes, input$bt_file)
     output$txt_file <- renderText(as.character(file_selected$datapath))
     }
     as.character(file_selected$datapath)
     })
 
 #파일명 추출
-file_selected<-reactive({parseFilePaths(volumes, input$input_dir)
+file_selected<-reactive({parseFilePaths(volumes, input$bt_file)
 })
 
 output$file_name <- renderText({

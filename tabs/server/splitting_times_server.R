@@ -9,7 +9,8 @@ volumes = c('wd'='.')
 source_python('./tabs/server/splitting_times_data.py')
   
 ## file choose
-observe({shinyFileChoose(input, 'file1', roots=volumes, defaultPath='', defaultRoot='wd')})
+observe({shinyFileChoose(input, "st_file", roots=c(wd='.'), session = session)})
+#observe({shinyFileChoose(input, 'st_file', roots=volumes, defaultPath='', defaultRoot='wd')})
   
 ## uploaded file
 observe({
@@ -18,11 +19,11 @@ observe({
       upload_state = NULL
   )
     
-  observeEvent(input$file1, {
+  observeEvent(input$st_file, {
     values$upload_state <- 'uploaded'
   })
     
-  file_selected<-reactive({parseFilePaths(volumes, input$file1)})
+  file_selected<-reactive({parseFilePaths(volumes, input$st_file)})
     
   output$summary <- renderText({
     return(paste(file_selected()$name,"\n"))
@@ -32,12 +33,12 @@ observe({
   
   
 ## Data path ( list() data )
-lst <- eventReactive(input$file1, 
+lst <- eventReactive(input$st_file, 
                       {
                        lst1 <- list( )
-                       if (length(parseFilePaths(volumes, input$file1)$datapath)>=1){
-                         for(i in 1:length(parseFilePaths(volumes, input$file1)$datapath)){
-                           lst1[[i]] <- parseFilePaths(volumes, input$file1)$datapath[i]
+                       if (length(parseFilePaths(volumes, input$st_file)$datapath)>=1){
+                         for(i in 1:length(parseFilePaths(volumes, input$st_file)$datapath)){
+                           lst1[[i]] <- parseFilePaths(volumes, input$st_file)$datapath[i]
                          }
                        }
                        lst1
@@ -72,7 +73,7 @@ run5 <- reactive({
 ## file name list    
 names <- reactive({
   lst1 <- list()
-  file_selected<-parseFilePaths(volumes, input$file1)
+  file_selected<-parseFilePaths(volumes, input$st_file)
   nfiles <- length(file_selected$datapath)
   for(i in 1:nfiles){
     lst1[[i]] <- file_selected$name[i]
@@ -337,7 +338,7 @@ output$ks_t1 <- renderTable({
   
 #tab panel
 output$st <- renderUI({
-  if(is.null(input$file1) | input$Load==0){
+  if(is.null(input$st_file) | input$Load==0){
     h5("No available data yet.")
   }
   else{
