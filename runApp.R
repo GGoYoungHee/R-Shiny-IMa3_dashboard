@@ -15,12 +15,13 @@ py_install('pandas')
 
 ### file load ###
 source("func.R")
-source("tabs/ui/home.R",local=T)
-source("tabs/ui/plot.R",local=T)
-source("tabs/ui/bt.R",local=T)
-source("tabs/ui/about.R",local=T)
-source("tabs/ui/mcmc.R",local=T)
-source("tabs/ui/splitting_times.R",local=T)
+source("tabs/ui/home_ui.R",local=T)
+source("tabs/ui/plot_ui.R",local=T)
+source("tabs/ui/bt_ui.R",local=T)
+source("tabs/ui/about_ui.R",local=T)
+source("tabs/ui/mcmc_ui.R",local=T)
+source("tabs/ui/ct_ui.R",local=T)
+source("tabs/ui/splitting_times_ui.R",local=T)
 
 #### Code ####
 ui<-fluidPage(
@@ -49,16 +50,18 @@ ui<-fluidPage(
                bt,
                mcmc, # NEW CODE
                st,
+               ct,
                about
                #tabPanel("ABOUT US",value='about')
                ))
 
 server<-function(input,output,session){
-  source("tabs/server/home.R",local=T)
-  source("tabs/server/plot.R",local=T)
-  source("tabs/server/bt.R",local=T)
-  source("tabs/server/mcmc.R",local=T)
-  source("tabs/server/splitting_times.R",local=T)
+  source("tabs/server/home_server.R",local=T)
+  source("tabs/server/plot_server.R",local=T)
+  source("tabs/server/bt_server.R",local=T)
+  source("tabs/server/mcmc_server.R",local=T)
+  source("tabs/server/ct_server.R",local=T)
+  source("tabs/server/splitting_times_server.R",local=T)
 }
 
 shinyApp(ui,server)
