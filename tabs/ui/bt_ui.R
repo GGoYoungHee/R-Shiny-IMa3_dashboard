@@ -14,7 +14,7 @@ bt <- tabPanel("Brn-Thn",value='bt',
       
       strong("Find your input data"),
       br(),
-      shinyFilesButton("input_dir", "Choose a file" ,
+      shinyFilesButton("bt_file", "Choose a file" ,
                        title = "Please select a file:", multiple = FALSE,
                        buttonType = "default", class = NULL),
       #input 파일명 추출

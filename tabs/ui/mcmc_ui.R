@@ -10,7 +10,7 @@ mcmc = tabPanel("MCMC",value='mcmc',
                   
                   sidebarLayout(
                       sidebarPanel(
-                          shinyFilesButton("File_input", "Choose a file" ,
+                          shinyFilesButton("mcmc_file", "Choose a file" ,
                                             title = "Please select a file:", multiple = FALSE,
                                             buttonType = "default", class = NULL, icon(name="file-upload")),
                           

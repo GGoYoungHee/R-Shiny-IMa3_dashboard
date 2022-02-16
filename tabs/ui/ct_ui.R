@@ -18,15 +18,16 @@ ct <- tabPanel("Chisq-test",value='ct',
                              h5("(Maximum number of files available for upload: 5)"),
                              
                              # 파일 다중 선택
-                             shinyFilesButton('file1', 'File select', 'Please select a file', multiple=TRUE),
+
+                             shinyFilesButton('ct_file', 'File select', 'Please select a file', multiple=TRUE),
                              
                              h4("Uploaded file:"),
-                             verbatimTextOutput("summary"),
+                             verbatimTextOutput("ct_summary"),
                              
                              br(),
                              
-                             actionButton("Load", "Load Data"),
-                             
+                             actionButton("ct_Load", "Load Data"),
+        
                              br(),
                              
                              # burn-thin

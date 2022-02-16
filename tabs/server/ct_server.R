@@ -3,25 +3,23 @@
 library(reticulate)
 library(shinyFiles)
 library(reticulate)
-#install.packages("shinyWidgets")
 library(shinyWidgets)
 
 
 source_python('./tabs/server/writepop.py')
 
 options(shiny.maxRequestSize=500*1024^2)
-volumes = c('wd'='.')
 
 
-observe({shinyFileChoose(input, 'file1', roots=volumes, defaultPath='', defaultRoot='wd')})
+observe({shinyFileChoose(input, 'ct_file', roots=volumes, defaultPath='', defaultRoot='wd')})
 
 
-########################## ?ƒ­ë³„ë¡œ ê°? ?°?´?„° ì§€? • ##########################
+########################## ???ë³„ë¡œ ??? ????????? ì§€??? ##########################
 
-lst1 <- eventReactive(input$file1, 
-                      {req(input$Load!=0)
+ct_file_list <- eventReactive(input$ct_file, 
+                      {req(input$ct_Load!=0)
                         lst <- list( )
-                        file_selected<-parseFilePaths(volumes, input$file1)
+                        file_selected<-parseFilePaths(volumes, input$ct_file)
                         for(i in 1:5){
                           lst[[i]] <- file_selected$datapath[i]
                         }
@@ -29,114 +27,114 @@ lst1 <- eventReactive(input$file1,
                       })
 
 
-##########################  ?°?´?„° ë¡œë“œ  ##########################
+##########################  ????????? ë¡œë“œ  ##########################
 
-run1 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[1]]))
+ct_run1 <- reactive({
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[1]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?????? ????????? ???ì²˜ë¦¬
   run1 = scan(text= pop1, what = " ")
   run1 = as.numeric(run1)
   run1
 })
-nrun1 <- reactive({
-  nrun1 = run1()[1]
+ct_nrun1 <- reactive({
+  nrun1 = ct_run1()[1]
   nrun1
 })
 
-run2 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[2]]))
+ct_run2 <- reactive({
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[2]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?????? ????????? ???ì²˜ë¦¬
   run2 = scan(text= pop1, what = " ")
   run2 = as.numeric(run2)
   run2
 })
-nrun2 <- reactive({
-  nrun2 = run2()[1]
+ct_nrun2 <- reactive({
+  nrun2 = ct_run2()[1]
   nrun2
 })
 
 
-run3 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[3]]))
+ct_run3 <- reactive({
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[3]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?????? ????????? ???ì²˜ë¦¬
   run3 = scan(text= pop1, what = " ")
   run3 = as.numeric(run3)
   run3
 })
-nrun3 <- reactive({
-  nrun3 = run3()[1]
+ct_nrun3 <- reactive({
+  nrun3 = ct_run3()[1]
   nrun3
 })
 
 
-run4 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[4]]))
+ct_run4 <- reactive({
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[4]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?????? ????????? ???ì²˜ë¦¬
   run4 = scan(text= pop1, what = " ")
   run4 = as.numeric(run4)
   run4
 })
-nrun4 <- reactive({
-  nrun4 = run4()[1]
-  nrun5
+ct_nrun4 <- reactive({
+  nrun4 = ct_run4()[1]
+  nrun4
 })
 
 
-run5 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[5]]))
+ct_run5 <- reactive({
+  req(!is.null(input$ct_file) & input$ct_Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[5]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?????? ????????? ???ì²˜ë¦¬
   run5 = scan(text= pop1, what = " ")
   run5 = as.numeric(run5)
   run5
 })
-nrun5 <- reactive({
-  nrun5 = run5()[1]
+ct_nrun5 <- reactive({
+  nrun5 = ct_run5()[1]
   nrun5
 })
 
 
-########################## ?ŒŒ?¼ëª? ì¶œë ¥?•˜ê¸? ########################## 
+########################## ????????? ì¶œë ¥?????? ########################## 
 
 observe({
   values <- reactiveValues(
     upload_state = NULL
   )
-  observeEvent(input$file1, {
+  observeEvent(input$ct_file, {
     values$upload_state <- 'uploaded'
   })
-  file_selected<-reactive({parseFilePaths(volumes, input$file1)})
-  output$summary <- renderText({
+  file_selected<-reactive({parseFilePaths(volumes, input$ct_file)})
+  output$ct_summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })
 })
 
 
-########################## ì²«ë²ˆì§? ?°?´?„°  ##########################
+########################## ì²«ë²ˆ??? ?????????  ##########################
 
 #samplesize
 
 output$sample1<- renderText({
 
   burnin = input$Brnct1
-  if(burnin >= length(nrun1()) ){ 
+  if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct1/10
   
   if(burnin>0){
-    run.afterB = run1()[-c(1:burnin)]
+    run.afterB = ct_run1()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run1()
+    run.afterB = ct_run1()
   }
   nrun.afterB = length(run.afterB)
   
@@ -154,15 +152,15 @@ output$table1 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct1
-  if(burnin >= length(nrun1()) ){ 
+  if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct1/10
   
   if(burnin>0){
-    run.afterB = run1()[-c(1:burnin)]
+    run.afterB = ct_run1()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run1()
+    run.afterB = ct_run1()
   }
   nrun.afterB = length(run.afterB)
   
@@ -186,16 +184,16 @@ output$plot1 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct1
-  if(burnin >= length(nrun1()) ){ 
+  if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct1/10
   
   
   if(burnin>0){
-    run.afterB = run1()[-c(1:burnin)]
+    run.afterB = ct_run1()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run1()
+    run.afterB = ct_run1()
   }
   nrun.afterB = length(run.afterB)
   
@@ -213,7 +211,7 @@ output$plot1 <- renderPlot({
 })
 
 
-# ê·¸ë˜?”„ ?‹¤?š´ë¡œë“œ
+# ê·¸ë˜??? ??????ë¡œë“œ
 output$downloadct1 <-downloadHandler(
   filename=function(){paste0("traceplot_tab1.",input$ct_down_opt_1,setp="")},
   content = function(filect){
@@ -226,15 +224,15 @@ output$downloadct1 <-downloadHandler(
     }
     # burn-thin
     burnin = input$Brnct1
-    if(burnin >= length(nrun1()) ){ 
+    if(burnin >= length(ct_nrun1()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct1/10
     
     if(burnin>0){
-      run.afterB = run1()[-c(1:burnin)]
+      run.afterB = ct_run1()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run1()
+      run.afterB = ct_run1()
     }
     nrun.afterB = length(run.afterB)
     
@@ -259,15 +257,15 @@ output$chisq1 <- renderTable({
   # burn-thin
   
   burnin = input$Brnct1
-  if(burnin >= length(nrun1()) ){ 
+  if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct1/10
   
   if(burnin>0){
-    run.afterB = run1()[-c(1:burnin)]
+    run.afterB = ct_run1()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run1()
+    run.afterB = ct_run1()
   }
   nrun.afterB = length(run.afterB)
   
@@ -290,21 +288,21 @@ output$chisq1 <- renderTable({
   cbind(name,t)
   },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
-########################## ?‘ë²ˆì§¸ ?°?´?„°  ########################## 
+########################## ???ë²ˆì§¸ ?????????  ########################## 
 
 #samplesize
 output$sample2 <- renderText({
   
   burnin = input$Brnct2
-  if(burnin >= length(nrun2()) ){ 
+  if(burnin >= length(ct_nrun2()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct2/10
   
   if(burnin>0){
-    run.afterB = run2()[-c(1:burnin)]
+    run.afterB = ct_run2()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run2()
+    run.afterB = ct_run2()
   }
   nrun.afterB = length(run.afterB)
   
@@ -321,15 +319,15 @@ output$sample2 <- renderText({
 output$table2 <- renderTable({
   
   burnin = input$Brnct2
-  if(burnin >= length(nrun2()) ){ 
+  if(burnin >= length(ct_nrun2()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct2/10
   
   if(burnin>0){
-    run.afterB = run2()[-c(1:burnin)]
+    run.afterB = ct_run2()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run2()
+    run.afterB = ct_run2()
   }
   nrun.afterB = length(run.afterB)
   
@@ -353,15 +351,15 @@ output$plot2 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct2
-  if(burnin >= length(nrun2()) ){ 
+  if(burnin >= length(ct_nrun2()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct2/10
   
   if(burnin>0){
-    run.afterB = run2()[-c(1:burnin)]
+    run.afterB = ct_run2()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run2()
+    run.afterB = ct_run2()
   }
   nrun.afterB = length(run.afterB)
   
@@ -378,7 +376,7 @@ output$plot2 <- renderPlot({
 })
 
 
-# ê·¸ë˜?”„ ?‹¤?š´ë¡œë“œ
+# ê·¸ë˜??? ??????ë¡œë“œ
 output$downloadct2 <-downloadHandler(
   filename=function(){paste0("traceplot_tab2.",input$ct_down_opt_2,setp="")},
   content = function(filect){
@@ -392,15 +390,15 @@ output$downloadct2 <-downloadHandler(
     
     # burn-thin
     burnin = input$Brnct2
-    if(burnin >= length(nrun2()) ){ 
+    if(burnin >= length(ct_nrun2()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct2/10
     
     if(burnin>0){
-      run.afterB = run2()[-c(1:burnin)]
+      run.afterB = ct_run2()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run2()
+      run.afterB = ct_run2()
     }
     nrun.afterB = length(run.afterB)
     
@@ -425,15 +423,15 @@ output$chisq2 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct2
-  if(burnin >= length(nrun2()) ){ 
+  if(burnin >= length(ct_nrun2()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct2/10
   
   if(burnin>0){
-    run.afterB = run2()[-c(1:burnin)]
+    run.afterB = ct_run2()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run2()
+    run.afterB = ct_run2()
   }
   nrun.afterB = length(run.afterB)
   
@@ -458,22 +456,22 @@ output$chisq2 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?„¸ë²ˆì§¸ ?°?´?„°  ########################## 
+########################## ???ë²ˆì§¸ ?????????  ########################## 
 
 #samplesize
 output$sample3 <- renderText({
   
   # burn-thin
   burnin = input$Brnct3
-  if(burnin >= length(nrun3()) ){ 
+  if(burnin >= length(ct_nrun3()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct3/10
   
   if(burnin>0){
-    run.afterB = run3()[-c(1:burnin)]
+    run.afterB = ct_run3()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run3()
+    run.afterB = ct_run3()
   }
   nrun.afterB = length(run.afterB)
   
@@ -490,15 +488,15 @@ output$table3 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct3
-  if(burnin >= length(nrun3()) ){ 
+  if(burnin >= length(ct_nrun3()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct3/10
   
   if(burnin>0){
-    run.afterB = run3()[-c(1:burnin)]
+    run.afterB = ct_run3()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run3()
+    run.afterB = ct_run3()
   }
   nrun.afterB = length(run.afterB)
   
@@ -522,15 +520,15 @@ output$plot3 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct3
-  if(burnin >= length(nrun3()) ){ 
+  if(burnin >= length(ct_nrun3()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct3/10
   
   if(burnin>0){
-    run.afterB = run3()[-c(1:burnin)]
+    run.afterB = ct_run3()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run3()
+    run.afterB = ct_run3()
   }
   nrun.afterB = length(run.afterB)
   
@@ -560,15 +558,15 @@ output$downloadct3 <-downloadHandler(
     
     # burn-thin
     burnin = input$Brnct3
-    if(burnin >= length(nrun3()) ){ 
+    if(burnin >= length(ct_nrun3()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct3/10
     
     if(burnin>0){
-      run.afterB = run3()[-c(1:burnin)]
+      run.afterB = ct_run3()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run3()
+      run.afterB = ct_run3()
     }
     nrun.afterB = length(run.afterB)
     
@@ -592,15 +590,15 @@ output$chisq3 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct3
-  if(burnin >= length(nrun3()) ){ 
+  if(burnin >= length(ct_nrun3()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct3/10
   
   if(burnin>0){
-    run.afterB = run3()[-c(1:burnin)]
+    run.afterB = ct_run3()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run3()
+    run.afterB = ct_run3()
   }
   nrun.afterB = length(run.afterB)
   
@@ -624,22 +622,22 @@ output$chisq3 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?„¤ë²ˆì§¸ ?°?´?„°  ########################## 
+########################## ???ë²ˆì§¸ ?????????  ########################## 
 
 #samplesize
 output$sample4 <- renderText({
   
   # burn-thin
   burnin = input$Brnct4
-  if(burnin >= length(nrun4()) ){ 
+  if(burnin >= length(ct_nrun4()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct4/10
   
   if(burnin>0){
-    run.afterB = run4()[-c(1:burnin)]
+    run.afterB = ct_run4()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run4()
+    run.afterB = ct_run4()
   }
   nrun.afterB = length(run.afterB)
   
@@ -656,15 +654,15 @@ output$table4 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct4
-  if(burnin >= length(nrun4()) ){ 
+  if(burnin >= length(ct_nrun4()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct4/10
   
   if(burnin>0){
-    run.afterB = run4()[-c(1:burnin)]
+    run.afterB = ct_run4()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run4()
+    run.afterB = ct_run4()
   }
   nrun.afterB = length(run.afterB)
   
@@ -688,15 +686,15 @@ output$plot4 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct4
-  if(burnin >= length(nrun4()) ){ 
+  if(burnin >= length(ct_nrun4()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct4/10
   
   if(burnin>0){
-    run.afterB = run4()[-c(1:burnin)]
+    run.afterB = ct_run4()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run4()
+    run.afterB = ct_run4()
   }
   nrun.afterB = length(run.afterB)
   
@@ -726,15 +724,15 @@ output$downloadct4 <-downloadHandler(
     
     # burn-thin
     burnin = input$Brnct4
-    if(burnin >= length(nrun4()) ){ 
+    if(burnin >= length(ct_nrun4()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct4/10
     
     if(burnin>0){
-      run.afterB = run4()[-c(1:burnin)]
+      run.afterB = ct_run4()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run4()
+      run.afterB = ct_run4()
     }
     nrun.afterB = length(run.afterB)
     
@@ -758,15 +756,15 @@ output$chisq4 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct4
-  if(burnin >= length(nrun4()) ){ 
+  if(burnin >= length(ct_nrun4()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct4/10
   
   if(burnin>0){
-    run.afterB = run4()[-c(1:burnin)]
+    run.afterB = ct_run4()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run4()
+    run.afterB = ct_run4()
   }
   nrun.afterB = length(run.afterB)
   
@@ -790,22 +788,22 @@ output$chisq4 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?‹¤?„¯ë²ˆì§¸ ?°?´?„°  ########################## 
+########################## ??????ë²ˆì§¸ ?????????  ########################## 
 
 #samplesize
 output$sample5 <- renderText({
   
   # burn-thin
   burnin = input$Brnct5
-  if(burnin >= length(nrun5()) ){ 
+  if(burnin >= length(ct_nrun5()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct5/10
   
   if(burnin>0){
-    run.afterB = run5()[-c(1:burnin)]
+    run.afterB = ct_run5()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run5()
+    run.afterB = ct_run5()
   }
   nrun.afterB = length(run.afterB)
   
@@ -822,15 +820,15 @@ output$table5 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct5
-  if(burnin >= length(nrun5()) ){ 
+  if(burnin >= length(ct_nrun5()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct5/10
   
   if(burnin>0){
-    run.afterB = run5()[-c(1:burnin)]
+    run.afterB = ct_run5()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run5()
+    run.afterB = ct_run5()
   }
   nrun.afterB = length(run.afterB)
   
@@ -854,15 +852,15 @@ output$plot5 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct5
-  if(burnin >= length(nrun5()) ){ 
+  if(burnin >= length(ct_nrun5()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct5/10
   
   if(burnin>0){
-    run.afterB = run5()[-c(1:burnin)]
+    run.afterB = ct_run5()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run5()
+    run.afterB = ct_run5()
   }
   nrun.afterB = length(run.afterB)
   
@@ -892,15 +890,15 @@ output$downloadct5 <-downloadHandler(
     
     # burn-thin
     burnin = input$Brnct5
-    if(burnin >= length(nrun5()) ){ 
+    if(burnin >= length(ct_nrun5()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct5/10
     
     if(burnin>0){
-      run.afterB = run5()[-c(1:burnin)]
+      run.afterB = ct_run5()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run5()
+      run.afterB = ct_run5()
     }
     nrun.afterB = length(run.afterB)
     
@@ -924,15 +922,15 @@ output$chisq5 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct5
-  if(burnin >= length(nrun5()) ){ 
+  if(burnin >= length(ct_nrun5()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct5/10
   
   if(burnin>0){
-    run.afterB = run5()[-c(1:burnin)]
+    run.afterB = ct_run5()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run5()
+    run.afterB = ct_run5()
   }
   nrun.afterB = length(run.afterB)
   
@@ -957,16 +955,16 @@ output$chisq5 <- renderTable({
 
 
 
-#### ?ŒŒ?¼ëª? ì¶œë ¥?•˜ê¸? 
+#### ????????? ì¶œë ¥?????? 
 observe({
   values <- reactiveValues(
     upload_state = NULL
   )
-  observeEvent(input$file1, {
+  observeEvent(input$ct_file, {
     values$upload_state <- 'uploaded'
   })
-  file_selected<-reactive({parseFilePaths(volumes, input$file1)})
-  output$summary <- renderText({
+  file_selected<-reactive({parseFilePaths(volumes, input$ct_file)})
+  output$ct_summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })
 })
@@ -974,7 +972,7 @@ observe({
 
 #tabpanel(cttb)
 output$cttb <-renderUI({
-  if(is.null(lst()))
+  if(is.null(ct_file_list()))
     h5("No available data yet.")
   else
     tabsetPanel(id='tabSet',
@@ -1118,6 +1116,3 @@ output$cttb <-renderUI({
                 )
     )
 })
-
-
-

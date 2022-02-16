@@ -4,10 +4,10 @@ library(dplyr)
 # python code
 source_python('./tabs/server/MCMC_retrun.py') 
 
-observe({shinyFileChoose(input, "File_input", roots=c(wd='.'), session = session)})
+observe({shinyFileChoose(input, "mcmc_file", roots=c(wd='.'), session = session)})
 
 # file setting
-mcmc_file = reactive({input$File_input}) # path check
+mcmc_file = reactive({input$mcmc_file}) # path check
 allPath = reactive({as.character(parseFilePaths(c(wd='.'),mcmc_file())$datapath)}) # file name
 mcmc_data = reactive({ Readti(allPath()) }) # file read
 
@@ -37,7 +37,7 @@ observe({
 
 # Trace Plot likelihood
 output$TracePlot_LH = renderPlot({
-  if(length(input$File_input) <= 1) return({})
+  if(length(input$mcmc_file) <= 1) return({})
   par(mfrow=c(1,3))
   layout(matrix(1:3,3,1))
   par(mar=c(2,6,1,1), cex.lab=2)
@@ -50,7 +50,7 @@ output$TracePlot_LH = renderPlot({
 
 # Trace Plot splitting times
 output$TracePlot_SP = renderPlot({
-  if(length(input$File_input) <= 1) return({}) # 값을 안받을때는 공백 반환.
+  if(length(input$mcmc_file) <= 1) return({}) # 값을 안받을때는 공백 반환.
   
   # 일단 2개는 확정으로 출력.
   layout(matrix(1:(ncol(mcmc_data())-2),ncol(mcmc_data())-2,1))
@@ -71,7 +71,7 @@ output$TracePlot_SP = renderPlot({
 
 # Density plots, t0과 t1... 다수의 tn에 대해 구현함.
 output$DensityPlot = renderPlot({
-  if(length(input$File_input) <= 1) return({}) 
+  if(length(input$mcmc_file) <= 1) return({}) 
   
   layout(matrix(1:(ncol(mcmc_data())-2),1,ncol(mcmc_data())-2))
   counter = 0 # t0, t1계속 증가시키기 위한 카운터터
@@ -84,7 +84,7 @@ output$DensityPlot = renderPlot({
 
 # Autocorrelation and ESS, Creating MCMC object
 ti.mcmc = reactive({
-  if(length(input$File_input) <= 1) return({})
+  if(length(input$mcmc_file) <= 1) return({})
   line = mcmc_data()
   line$logPosterior = line$loglikelihood + line$logprior
   line = line %>% relocate(c("logPosterior", "loglikelihood", 'logprior'))
