@@ -25,7 +25,7 @@ observe({
     
   file_selected<-reactive({parseFilePaths(volumes, input$st_file)})
     
-  output$summary <- renderText({
+  output$st_summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })
     

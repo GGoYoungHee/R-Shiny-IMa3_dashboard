@@ -113,7 +113,7 @@ observe({
     values$upload_state <- 'uploaded'
   })
   file_selected<-reactive({parseFilePaths(volumes, input$ct_file)})
-  output$summary <- renderText({
+  output$ct_summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })
 })
@@ -964,7 +964,7 @@ observe({
     values$upload_state <- 'uploaded'
   })
   file_selected<-reactive({parseFilePaths(volumes, input$ct_file)})
-  output$summary <- renderText({
+  output$ct_summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })
 })

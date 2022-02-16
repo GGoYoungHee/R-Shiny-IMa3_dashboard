@@ -21,7 +21,7 @@ ct <- tabPanel("Chisq-test",value='ct',
                              shinyFilesButton('ct_file', 'File select', 'Please select a file', multiple=TRUE),
                              
                              h4("Uploaded file:"),
-                             verbatimTextOutput("summary"),
+                             verbatimTextOutput("ct_summary"),
                              
                              br(),
                              

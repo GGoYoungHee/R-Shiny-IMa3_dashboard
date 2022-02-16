@@ -11,7 +11,7 @@ st <- tabPanel("Splitting times",value='st',
                 shinyFilesButton('st_file', 'SELECT FILE', 'Please select files', multiple=TRUE),
                 br(),
                 h4("Uploaded file:"),
-                verbatimTextOutput("summary"),
+                verbatimTextOutput("st_summary"),
                 br(),
                 actionButton("st_load", "LOAD DATA")
             ),
