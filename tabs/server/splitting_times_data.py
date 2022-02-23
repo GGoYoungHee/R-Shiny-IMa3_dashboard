@@ -34,6 +34,6 @@ def get_data(input_dir, start=130):
                            'logLik' : logLik,
                            'logPrior' : logPrior,
                            't0' : t0,
-                           't1' : t1})
+                           't1' : t1}).apply(pd.to_numeric)
     
     return tifile
