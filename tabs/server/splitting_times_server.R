@@ -202,9 +202,12 @@ ti_total <- reactive({
 output$kruskal_t0 <- renderTable({
   
   if (length(st_file_list()) >= 2){
+    stime = Sys.time()
     k_test <- kruskal.test(t0 ~ run, data = ti_total())
     kr_t0 <- data.frame(k_test$data.name, k_test$statistic, k_test$parameter, k_test$p.value)
     names(kr_t0) <- c("data name", "chi-squared", "df", "pvalue")
+    etime = Sys.time() - stime
+    cat(paste0('ks_t0 test \t work time : ', etime, '\n'))
     kr_t0
     }
   }, bordered = TRUE, digits = 6)
@@ -213,9 +216,12 @@ output$kruskal_t0 <- renderTable({
 ## t1 kruskal test
 output$kruskal_t1 <- renderTable({
   if (length(st_file_list()) >= 2){
+    stime = Sys.time()
     k_test <- kruskal.test(t1 ~ run, data = ti_total())
     kr_t1 <- data.frame(k_test$data.name, k_test$statistic, k_test$parameter, k_test$p.value)
     names(kr_t1) <- c("data name", "chi-squared", "df", "pvalue")
+    etime = Sys.time() - stime
+    cat(paste0('ks_t1 test \t work time : ', etime, '\n'))
     kr_t1
     }
   }, bordered = TRUE, digits = 6)
@@ -228,6 +234,7 @@ output$kruskal_t1 <- renderTable({
 ## t0 wilcox test
 output$wilcox_t0 <- renderTable({
   if (length(st_file_list()) >= 2){
+    stime = Sys.time()
     set1 <- list()
     set2 <- list()
     pvalue <- list()
@@ -246,6 +253,8 @@ output$wilcox_t0 <- renderTable({
     }
     w_t0 <- cbind(set1, set2, pvalue)
     names(w_t0) <- c("set1", "set2", "pvalue")
+    etime = Sys.time() - stime
+    cat(paste0('wilcox_t0 test \t work time : ', etime, '\n'))
     w_t0
     }
   }, bordered = TRUE, digits = 6)
@@ -255,6 +264,7 @@ output$wilcox_t0 <- renderTable({
 output$wilcox_t1 <- renderTable({
   
   if (length(st_file_list()) >= 2){
+    stime = Sys.time()
     set1 <- list()
     set2 <- list()
     pvalue <- list()
@@ -273,6 +283,8 @@ output$wilcox_t1 <- renderTable({
     }
     w_t1 <- cbind(set1, set2, pvalue)
     names(w_t1) <- c("set1", "set2", "pvalue")
+    etime = Sys.time() - stime
+    cat(paste0('wilcox_t1 test \t work time : ', etime, '\n'))
     w_t1
     }
   }, bordered = TRUE, digits = 6)
@@ -286,6 +298,7 @@ output$wilcox_t1 <- renderTable({
 output$ks_t0 <- renderTable({
   
   if (length(st_file_list()) >= 2){
+    stime = Sys.time()
     set1 <- list()
     set2 <- list()
     pvalue <- list()
@@ -304,6 +317,8 @@ output$ks_t0 <- renderTable({
     }
     k_t0 <- cbind(set1, set2, pvalue)
     names(k_t0) <- c("set1", "set2", "pvalue")
+    etime = Sys.time() - stime
+    cat(paste0('kolmogorov_t0 test \t work time : ', etime, '\n'))
     k_t0
     }
   }, bordered = TRUE, digits = 6)
@@ -313,6 +328,7 @@ output$ks_t0 <- renderTable({
 output$ks_t1 <- renderTable({
   
   if (length(st_file_list()) >= 2){
+    stime = Sys.time()
     set1 <- list()
     set2 <- list()
     pvalue <- list()
@@ -331,6 +347,8 @@ output$ks_t1 <- renderTable({
     }
     k_t1 <- cbind(set1, set2, pvalue)
     names(k_t1) <- c("set1", "set2", "pvalue")
+    etime = Sys.time() - stime
+    cat(paste0('kolmogorov_t1 test \t work time : ', etime, '\n'))
     k_t1
     }
   }, bordered = TRUE, digits = 6)
