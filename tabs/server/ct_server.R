@@ -5,7 +5,8 @@ library(shinyFiles)
 library(reticulate)
 #install.packages("shinyWidgets")
 library(shinyWidgets)
-
+#install.packages("reshape")
+library(reshape)
 
 source_python('./tabs/server/writepop.py')
 
@@ -16,7 +17,7 @@ volumes = c('wd'='.')
 observe({shinyFileChoose(input, 'file1', roots=volumes, defaultPath='', defaultRoot='wd')})
 
 
-########################## ?ƒ­ë³„ë¡œ ê°? ?°?´?„° ì§€? • ##########################
+########################## ?êº†è¹‚ê¾¨ì¤ˆ åª›? ?ëœ²?ì” ?ê½£ ï§Â€?ì ™ ##########################
 
 lst1 <- eventReactive(input$file1, 
                       {req(input$Load!=0)
@@ -29,13 +30,13 @@ lst1 <- eventReactive(input$file1,
                       })
 
 
-##########################  ?°?´?„° ë¡œë“œ  ##########################
+##########################  ?ëœ²?ì” ?ê½£ æ¿¡ì’•ë±¶  ##########################
 
 run1 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
   pop1 <- popvals(as.character(lst1()[[1]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?ì?ë¹ ?ëœ²?ì” ?ê½£ ?ìŸ¾ï§£ì„â”
   run1 = scan(text= pop1, what = " ")
   run1 = as.numeric(run1)
   run1
@@ -49,7 +50,7 @@ run2 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
   pop1 <- popvals(as.character(lst1()[[2]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?ì?ë¹ ?ëœ²?ì” ?ê½£ ?ìŸ¾ï§£ì„â”
   run2 = scan(text= pop1, what = " ")
   run2 = as.numeric(run2)
   run2
@@ -64,7 +65,7 @@ run3 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
   pop1 <- popvals(as.character(lst1()[[3]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?ì?ë¹ ?ëœ²?ì” ?ê½£ ?ìŸ¾ï§£ì„â”
   run3 = scan(text= pop1, what = " ")
   run3 = as.numeric(run3)
   run3
@@ -79,7 +80,7 @@ run4 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
   pop1 <- popvals(as.character(lst1()[[4]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?ì?ë¹ ?ëœ²?ì” ?ê½£ ?ìŸ¾ï§£ì„â”
   run4 = scan(text= pop1, what = " ")
   run4 = as.numeric(run4)
   run4
@@ -94,7 +95,7 @@ run5 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
   pop1 <- popvals(as.character(lst1()[[5]]))
   
-  # burn-thin ?œ„?•´ ?°?´?„° ? „ì²˜ë¦¬
+  # burn-thin ?ì?ë¹ ?ëœ²?ì” ?ê½£ ?ìŸ¾ï§£ì„â”
   run5 = scan(text= pop1, what = " ")
   run5 = as.numeric(run5)
   run5
@@ -105,7 +106,7 @@ nrun5 <- reactive({
 })
 
 
-########################## ?ŒŒ?¼ëª? ì¶œë ¥?•˜ê¸? ########################## 
+########################## ?ë™†?ì”ªï§? ç•°ì’•ì °?ë¸¯æ¹²? ########################## 
 
 observe({
   values <- reactiveValues(
@@ -121,7 +122,7 @@ observe({
 })
 
 
-########################## ì²«ë²ˆì§? ?°?´?„°  ##########################
+########################## ï§£ãƒ«ì¾²ï§? ?ëœ²?ì” ?ê½£  ##########################
 
 #samplesize
 
@@ -173,13 +174,20 @@ output$table1 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  #df1 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  df1 <- data.frame(addmargins(cbind(table(run.afterBT),prop.table(table(run.afterBT)))))
-  colnames(df1) <- c("topology","ratio","sample size")
-  t(df1) 
+  df1_1 <- data.frame(addmargins(table(run.afterBT)))
+  df1_2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df1_1) <- c("topology","sample size")
+  colnames(df1_2) <- c("topology","ratio")
+  df1_3 <- merge(df1_1,df1_2,by='topology',all=T)
+  df1_4 <- as.data.frame(t(df1_3))
+  df1_4$columns <-c("toplogy","count","proportion")
+  df1_4 <- df1_4[,c(5,1,2,3,4)]
+  names(df1_4) <- c(df1_4[1,]) 
+  options(digits=6)
+  df1_4 <- df1_4[-1,]
+  df1_4
   },
   bordered=T)
-  
 
 #plot
 output$plot1 <- renderPlot({
@@ -213,7 +221,7 @@ output$plot1 <- renderPlot({
 })
 
 
-# ê·¸ë˜?”„ ?‹¤?š´ë¡œë“œ
+# æ´¹ëªƒì˜’?ë´½ ?ë–?ìŠ«æ¿¡ì’•ë±¶
 output$downloadct1 <-downloadHandler(
   filename=function(){paste0("traceplot_tab1.",input$ct_down_opt_1,setp="")},
   content = function(filect){
@@ -290,7 +298,7 @@ output$chisq1 <- renderTable({
   cbind(name,t)
   },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
-########################## ?‘ë²ˆì§¸ ?°?´?„°  ########################## 
+########################## ?ëª¢è¸°ë‰ã ?ëœ²?ì” ?ê½£  ########################## 
 
 #samplesize
 output$sample2 <- renderText({
@@ -339,12 +347,19 @@ output$table2 <- renderTable({
     run.afterBT = run.afterB
   }
   nrun.afterBT= length(run.afterBT)
+  df2_1 <- data.frame(addmargins(table(run.afterBT)))
+  df2_2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df2_1) <- c("topology","sample size")
+  colnames(df2_2) <- c("topology","ratio")
+  df2_3 <- merge(df2_1,df2_2,by='topology',all=T)
+  df2_4 <- as.data.frame(t(df2_3))
+  df2_4$columns <-c("toplogy","count","proportion")
+  df2_4 <- df2_4[,c(5,1,2,3,4)]
+  names(df2_4) <- c(df2_4[1,]) 
+  options(digits=6)
+  df2_4 <- df2_4[-1,]
+  df2_4
   
-  addmargins(prop.table(table(run.afterBT)))
-  
-  df2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df2) <- c("topology","ratio")
-  df2
 },
   bordered=T)
 
@@ -378,7 +393,7 @@ output$plot2 <- renderPlot({
 })
 
 
-# ê·¸ë˜?”„ ?‹¤?š´ë¡œë“œ
+# æ´¹ëªƒì˜’?ë´½ ?ë–?ìŠ«æ¿¡ì’•ë±¶
 output$downloadct2 <-downloadHandler(
   filename=function(){paste0("traceplot_tab2.",input$ct_down_opt_2,setp="")},
   content = function(filect){
@@ -458,7 +473,7 @@ output$chisq2 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?„¸ë²ˆì§¸ ?°?´?„°  ########################## 
+########################## ?ê½­è¸°ë‰ã ?ëœ²?ì” ?ê½£  ########################## 
 
 #samplesize
 output$sample3 <- renderText({
@@ -509,11 +524,19 @@ output$table3 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  addmargins(prop.table(table(run.afterBT)))
+  df3_1 <- data.frame(addmargins(table(run.afterBT)))
+  df3_2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df3_1) <- c("topology","sample size")
+  colnames(df3_2) <- c("topology","ratio")
+  df3_3 <- merge(df3_1,df3_2,by='topology',all=T)
+  df3_4 <- as.data.frame(t(df3_3))
+  df3_4$columns <-c("toplogy","count","proportion")
+  df3_4 <- df3_4[,c(5,1,2,3,4)]
+  names(df3_4) <- c(df3_4[1,]) 
+  options(digits=6)
+  df3_4 <- df3_4[-1,]
+  df3_4
   
-  df3 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df3) <- c("topology","ratio")
-  df3
   
 }, bordered=T)
 
@@ -624,7 +647,7 @@ output$chisq3 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?„¤ë²ˆì§¸ ?°?´?„°  ########################## 
+########################## ?ê½•è¸°ë‰ã ?ëœ²?ì” ?ê½£  ########################## 
 
 #samplesize
 output$sample4 <- renderText({
@@ -674,12 +697,19 @@ output$table4 <- renderTable({
     run.afterBT = run.afterB
   }
   nrun.afterBT= length(run.afterBT)
+  df4_1 <- data.frame(addmargins(table(run.afterBT)))
+  df4_2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df4_1) <- c("topology","sample size")
+  colnames(df4_2) <- c("topology","ratio")
+  df4_3 <- merge(df4_1,df4_2,by='topology',all=T)
+  df4_4 <- as.data.frame(t(df4_3))
+  df4_4$columns <-c("toplogy","count","proportion")
+  df4_4 <- df4_4[,c(5,1,2,3,4)]
+  names(df4_4) <- c(df4_4[1,]) 
+  options(digits=6)
+  df4_4 <- df4_4[-1,]
+  df4_4
   
-  addmargins(prop.table(table(run.afterBT)))
-  
-  df4 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df4) <- c("topology","ratio")
-  df4
 },
   bordered=T)
 
@@ -790,7 +820,7 @@ output$chisq4 <- renderTable({
 },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 
-########################## ?‹¤?„¯ë²ˆì§¸ ?°?´?„°  ########################## 
+########################## ?ë–?ê½¢è¸°ë‰ã ?ëœ²?ì” ?ê½£  ########################## 
 
 #samplesize
 output$sample5 <- renderText({
@@ -839,13 +869,19 @@ output$table5 <- renderTable({
   }else if(thinning==0){
     run.afterBT = run.afterB
   }
-  nrun.afterBT= length(run.afterBT)
+  df5_1 <- data.frame(addmargins(table(run.afterBT)))
+  df5_1 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df5_1) <- c("topology","sample size")
+  colnames(df5_2) <- c("topology","ratio")
+  df5_3 <- merge(df5_1,df5_2,by='topology',all=T)
+  df5_4 <- as.data.frame(t(df5_3))
+  df5_4$columns <-c("toplogy","count","proportion")
+  df5_4 <- df5_4[,c(5,1,2,3,4)]
+  names(df5_4) <- c(df5_4[1,]) 
+  options(digits=6)
+  df5_4 <- df5_4[-1,]
+  df5_4
   
-  addmargins(prop.table(table(run.afterBT)))
-  
-  df5 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df5) <- c("topology","ratio")
-  df5
 },
   bordered=T)
 
@@ -957,7 +993,7 @@ output$chisq5 <- renderTable({
 
 
 
-#### ?ŒŒ?¼ëª? ì¶œë ¥?•˜ê¸? 
+#### ?ë™†?ì”ªï§? ç•°ì’•ì °?ë¸¯æ¹²? 
 observe({
   values <- reactiveValues(
     upload_state = NULL
