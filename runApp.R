@@ -11,7 +11,6 @@ library(reticulate)
 ### Miniconda ###
 install_miniconda()
 py_install('pandas')
-volumes = c('wd'='.')
 
 ### file load ###
 source("func.R")
@@ -33,7 +32,7 @@ ui<-fluidPage(
                                          '.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, 
                                          .navbar-default .navbar-nav>.active>a:focus  {background-color: #11324D;}',
                                          '.btn-default {background-color: #11324D;}',
-                                         '.btn-default.active {background-color: #11324D;}',
+                                         '.btn-default.active {background-color: #11324D;}', 
                                          '.btn-default:focus, .btn-default.focus {background-color: #11324D;}',
                                          '.btn-default:hover {background-color: #11324D;}',
                                          '.btn-default:active:hover, .btn-default.active:hover, .open>.dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open>.dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open>.dropdown-toggle.btn-default.focus {background-color: #4B6587;}',
