@@ -46,32 +46,37 @@ st_file_list <- eventReactive(input$st_file,
 ### DataSet Load ###
 
 st_run1 <- reactive({
+  stime = Sys.time()
   pop1 <- get_data(as.character(st_file_list()[[1]]))
-  cat('Set1 Load \n')
+  etime = Sys.time() - stime; cat(paste0('Set1 Load time : ', etime, '\n'))
   pop1
 })
 
 st_run2 <- reactive({
+  stime = Sys.time()
   pop1 <- get_data(as.character(st_file_list()[[2]]))
-  cat('Set2 Load \n')
+  etime = Sys.time() - stime; cat(paste0('Set2 Load time : ', etime, '\n'))
   pop1
 })
   
 st_run3 <- reactive({
+  stime = Sys.time()
   pop1 <- get_data(as.character(st_file_list()[[3]]))
-  cat('Set3 Load \n')
+  etime = Sys.time() - stime; cat(paste0('Set3 Load time : ', etime, '\n'))
   pop1
 })
 
 st_run4 <- reactive({
+  stime = Sys.time()
   pop1 <- get_data(as.character(st_file_list()[[4]]))
-  cat('Set4 Load \n')
+  etime = Sys.time() - stime; cat(paste0('Set4 Load time : ', etime, '\n'))
   pop1
 })
   
 st_run5 <- reactive({
+  stime = Sys.time()
   pop1 <- get_data(as.character(st_file_list()[[5]]))
-  cat('Set5 Load \n')
+  etime = Sys.time() - stime; cat(paste0('Set5 Load time : ', etime, '\n'))
   pop1
 })
   
@@ -106,7 +111,7 @@ output$datanames2 <- renderText({return(paste(setnames(),"\n"))})
 ##################
 
 max_t0 <- reactive({
-  cat('max_t0 calculate \n')
+  stime = Sys.time()
   lst_t0 <- list()
   for (i in seq(length(st_file_list()))){
     switch(as.character(i),
@@ -118,13 +123,13 @@ max_t0 <- reactive({
     )
   }
   max_t0 <- which.max(lst_t0)
-  cat('max_t0 calculate END \n')
+  etime = Sys.time() - stime; cat(paste0('max_t0 calculate time : ', etime, '\n'))
   lst_t0[[max_t0]]
 })
 
   
 max_t1 <- reactive({
-  cat('max_t1 calculate \n')
+  stime = Sys.time()
   lst_t1 <- list()
   for (i in seq(length(st_file_list()))){
     switch(as.character(i),
@@ -136,7 +141,7 @@ max_t1 <- reactive({
     )
   }
   max_t1 <- which.max(lst_t1)
-  cat('max_t1 calculate END \n')
+  etime = Sys.time() - stime; cat(paste0('max_t1 calculate time : ', etime, '\n'))
   lst_t1[[max_t1]]
 })
   
@@ -145,7 +150,7 @@ plot.col <- 1:675
   
 ## t0 density plot
 output$distPlot_t0 <-renderPlot({
-  cat('t0_plot Render START \n')
+  stime = Sys.time()
   nfiles <- length(st_file_list())
   if (nfiles < 2){
     plot.new()
@@ -162,13 +167,13 @@ output$distPlot_t0 <-renderPlot({
     }
   legend("topright",legend=names(), fill =plot.col[1:nfiles])
   }  
-  cat('t0_plot Render END \n')
+  etime = Sys.time() - stime; cat(paste0('t0_plot Render time : ', etime, '\n'))
 })
   
   
 ## t1 density plot    
 output$distPlot_t1 <- renderPlot({
-  cat('t1_plot Render START \n')
+  stime = Sys.time()
   nfiles <- length(st_file_list())
   if (nfiles < 2){
     plot.new()
@@ -184,7 +189,7 @@ output$distPlot_t1 <- renderPlot({
     }
     legend("topright",legend=names(), fill =plot.col[1:nfiles])
   }
-  cat('t1_plot Render END \n')
+  etime = Sys.time() - stime; cat(paste0('t1_plot Render time : ', etime, '\n'))
 })
   
   
