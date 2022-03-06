@@ -17,90 +17,90 @@ observe({shinyFileChoose(input, 'file1', roots=volumes, defaultPath='', defaultR
 
 ########################## ?꺆蹂꾨줈 媛? ?뜲?씠?꽣 吏?젙 ##########################
 
-lst1 <- eventReactive(input$file1, 
+ct_lst1 <- eventReactive(input$file1, 
                       {req(input$Load!=0)
-                        lst <- list( )
+                        ct_lst <- list( )
                         file_selected<-parseFilePaths(volumes, input$file1)
                         for(i in 1:5){
-                          lst[[i]] <- file_selected$datapath[i]
+                          ct_lst[[i]] <- file_selected$datapath[i]
                         }
-                        lst 
+                        ct_lst 
                       })
 
 
 ##########################  ?뜲?씠?꽣 濡쒕뱶  ##########################
 
-run1 <- reactive({
+ct_run1 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[1]]))
+  pop1 <- popvals(as.character(ct_lst1()[[1]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
-  run1 = scan(text= pop1, what = " ")
-  run1 = as.numeric(run1)
-  run1
+  ct_run1 = scan(text= pop1, what = " ")
+  ct_run1 = as.numeric(ct_run1)
+  ct_run1
 })
-nrun1 <- reactive({
-  nrun1 = run1()[1]
-  nrun1
+ct_nrun1 <- reactive({
+  ct_nrun1 = ct_run1()[1]
+  ct_nrun1
 })
 
-run2 <- reactive({
+ct_run2 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[2]]))
+  pop1 <- popvals(as.character(ct_lst1()[[2]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
-  run2 = scan(text= pop1, what = " ")
-  run2 = as.numeric(run2)
-  run2
+  ct_run2 = scan(text= pop1, what = " ")
+  ct_run2 = as.numeric(ct_run2)
+  ct_run2
 })
-nrun2 <- reactive({
-  nrun2 = run2()[1]
-  nrun2
+ct_nrun2 <- reactive({
+  ct_nrun2 = ct_run2()[1]
+  ct_nrun2
 })
 
 
-run3 <- reactive({
+ct_run3 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[3]]))
+  pop1 <- popvals(as.character(ct_lst1()[[3]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
-  run3 = scan(text= pop1, what = " ")
-  run3 = as.numeric(run3)
-  run3
+  ct_run3 = scan(text= pop1, what = " ")
+  ct_run3 = as.numeric(ct_run3)
+  ct_run3
 })
-nrun3 <- reactive({
-  nrun3 = run3()[1]
-  nrun3
+ct_nrun3 <- reactive({
+  ct_nrun3 = ct_run3()[1]
+  ct_nrun3
 })
 
 
-run4 <- reactive({
+ct_run4 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[4]]))
+  pop1 <- popvals(as.character(ct_lst1()[[4]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
-  run4 = scan(text= pop1, what = " ")
-  run4 = as.numeric(run4)
-  run4
+  ct_run4 = scan(text= pop1, what = " ")
+  ct_run4 = as.numeric(ct_run4)
+  ct_run4
 })
-nrun4 <- reactive({
-  nrun4 = run4()[1]
-  nrun5
+ct_nrun4 <- reactive({
+  ct_nrun4 = ct_run4()[1]
+  ct_nrun4
 })
 
 
-run5 <- reactive({
+ct_run5 <- reactive({
   req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(lst1()[[5]]))
+  pop1 <- popvals(as.character(ct_lst1()[[5]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
-  run5 = scan(text= pop1, what = " ")
-  run5 = as.numeric(run5)
-  run5
+  ct_run5 = scan(text= pop1, what = " ")
+  ct_run5 = as.numeric(ct_run5)
+  ct_run5
 })
-nrun5 <- reactive({
-  nrun5 = run5()[1]
-  nrun5
+ct_nrun5 <- reactive({
+  ct_nrun5 = ct_run5()[1]
+  ct_nrun5
 })
 
 
@@ -127,15 +127,15 @@ observe({
 output$sample1<- renderText({
 
   burnin = input$Brnct1
-  if(burnin >= length(nrun1()) ){ 
+  if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct1/10
   
   if(burnin>0){
-    run.afterB = run1()[-c(1:burnin)]
+    run.afterB = ct_run1()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run1()
+    run.afterB = ct_run1()
   }
   nrun.afterB = length(run.afterB)
   
@@ -153,15 +153,15 @@ output$table1 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct1
-  if(burnin >= length(nrun1()) ){ 
+  if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct1/10
   
   if(burnin>0){
-    run.afterB = run1()[-c(1:burnin)]
+    run.afterB = ct_run1()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run1()
+    run.afterB = ct_run1()
   }
   nrun.afterB = length(run.afterB)
   
@@ -192,16 +192,16 @@ output$plot1 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct1
-  if(burnin >= length(nrun1()) ){ 
+  if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct1/10
   
   
   if(burnin>0){
-    run.afterB = run1()[-c(1:burnin)]
+    run.afterB = ct_run1()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run1()
+    run.afterB = ct_run1()
   }
   nrun.afterB = length(run.afterB)
   
@@ -232,15 +232,15 @@ output$downloadct1 <-downloadHandler(
     }
     # burn-thin
     burnin = input$Brnct1
-    if(burnin >= length(nrun1()) ){ 
+    if(burnin >= length(ct_nrun1()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct1/10
     
     if(burnin>0){
-      run.afterB = run1()[-c(1:burnin)]
+      run.afterB = ct_run1()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run1()
+      run.afterB = ct_run1()
     }
     nrun.afterB = length(run.afterB)
     
@@ -265,15 +265,15 @@ output$chisq1 <- renderTable({
   # burn-thin
   
   burnin = input$Brnct1
-  if(burnin >= length(nrun1()) ){ 
+  if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct1/10
   
   if(burnin>0){
-    run.afterB = run1()[-c(1:burnin)]
+    run.afterB = ct_run1()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run1()
+    run.afterB = ct_run1()
   }
   nrun.afterB = length(run.afterB)
   
@@ -284,12 +284,12 @@ output$chisq1 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead1/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail1/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead1/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail1/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq1 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq1 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq1$statistic,6), chisq1$p.value, chisq1$parameter)
@@ -302,15 +302,15 @@ output$chisq1 <- renderTable({
 output$sample2 <- renderText({
   
   burnin = input$Brnct2
-  if(burnin >= length(nrun2()) ){ 
+  if(burnin >= length(ct_nrun2()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct2/10
   
   if(burnin>0){
-    run.afterB = run2()[-c(1:burnin)]
+    run.afterB = ct_run2()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run2()
+    run.afterB = ct_run2()
   }
   nrun.afterB = length(run.afterB)
   
@@ -327,15 +327,15 @@ output$sample2 <- renderText({
 output$table2 <- renderTable({
   
   burnin = input$Brnct2
-  if(burnin >= length(nrun2()) ){ 
+  if(burnin >= length(ct_nrun2()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct2/10
   
   if(burnin>0){
-    run.afterB = run2()[-c(1:burnin)]
+    run.afterB = ct_run2()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run2()
+    run.afterB = ct_run2()
   }
   nrun.afterB = length(run.afterB)
   
@@ -366,15 +366,15 @@ output$plot2 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct2
-  if(burnin >= length(nrun2()) ){ 
+  if(burnin >= length(ct_nrun2()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct2/10
   
   if(burnin>0){
-    run.afterB = run2()[-c(1:burnin)]
+    run.afterB = ct_run2()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run2()
+    run.afterB = ct_run2()
   }
   nrun.afterB = length(run.afterB)
   
@@ -405,15 +405,15 @@ output$downloadct2 <-downloadHandler(
     
     # burn-thin
     burnin = input$Brnct2
-    if(burnin >= length(nrun2()) ){ 
+    if(burnin >= length(ct_nrun2()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct2/10
     
     if(burnin>0){
-      run.afterB = run2()[-c(1:burnin)]
+      run.afterB = ct_run2()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run2()
+      run.afterB = ct_run2()
     }
     nrun.afterB = length(run.afterB)
     
@@ -438,15 +438,15 @@ output$chisq2 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct2
-  if(burnin >= length(nrun2()) ){ 
+  if(burnin >= length(ct_nrun2()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct2/10
   
   if(burnin>0){
-    run.afterB = run2()[-c(1:burnin)]
+    run.afterB = ct_run2()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run2()
+    run.afterB = ct_run2()
   }
   nrun.afterB = length(run.afterB)
   
@@ -457,12 +457,12 @@ output$chisq2 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead2/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail2/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead2/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail2/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq2 <-  chisq.test(rbind(table(set1),table(set2)))
+  chisq2 <-  chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq2$statistic,6), chisq2$p.value, chisq2$parameter)
@@ -478,15 +478,15 @@ output$sample3 <- renderText({
   
   # burn-thin
   burnin = input$Brnct3
-  if(burnin >= length(nrun3()) ){ 
+  if(burnin >= length(ct_nrun3()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct3/10
   
   if(burnin>0){
-    run.afterB = run3()[-c(1:burnin)]
+    run.afterB = ct_run3()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run3()
+    run.afterB = ct_run3()
   }
   nrun.afterB = length(run.afterB)
   
@@ -503,15 +503,15 @@ output$table3 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct3
-  if(burnin >= length(nrun3()) ){ 
+  if(burnin >= length(ct_nrun3()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct3/10
   
   if(burnin>0){
-    run.afterB = run3()[-c(1:burnin)]
+    run.afterB = ct_run3()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run3()
+    run.afterB = ct_run3()
   }
   nrun.afterB = length(run.afterB)
   
@@ -543,15 +543,15 @@ output$plot3 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct3
-  if(burnin >= length(nrun3()) ){ 
+  if(burnin >= length(ct_nrun3()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct3/10
   
   if(burnin>0){
-    run.afterB = run3()[-c(1:burnin)]
+    run.afterB = ct_run3()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run3()
+    run.afterB = ct_run3()
   }
   nrun.afterB = length(run.afterB)
   
@@ -581,15 +581,15 @@ output$downloadct3 <-downloadHandler(
     
     # burn-thin
     burnin = input$Brnct3
-    if(burnin >= length(nrun3()) ){ 
+    if(burnin >= length(ct_nrun3()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct3/10
     
     if(burnin>0){
-      run.afterB = run3()[-c(1:burnin)]
+      run.afterB = ct_run3()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run3()
+      run.afterB = ct_run3()
     }
     nrun.afterB = length(run.afterB)
     
@@ -613,15 +613,15 @@ output$chisq3 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct3
-  if(burnin >= length(nrun3()) ){ 
+  if(burnin >= length(ct_nrun3()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct3/10
   
   if(burnin>0){
-    run.afterB = run3()[-c(1:burnin)]
+    run.afterB = ct_run3()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run3()
+    run.afterB = ct_run3()
   }
   nrun.afterB = length(run.afterB)
   
@@ -632,12 +632,12 @@ output$chisq3 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead3/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail3/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead3/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail3/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq3 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq3 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq3$statistic,6), chisq3$p.value, chisq3$parameter)
@@ -652,15 +652,15 @@ output$sample4 <- renderText({
   
   # burn-thin
   burnin = input$Brnct4
-  if(burnin >= length(nrun4()) ){ 
+  if(burnin >= length(ct_nrun4()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct4/10
   
   if(burnin>0){
-    run.afterB = run4()[-c(1:burnin)]
+    run.afterB = ct_run4()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run4()
+    run.afterB = ct_run4()
   }
   nrun.afterB = length(run.afterB)
   
@@ -677,15 +677,15 @@ output$table4 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct4
-  if(burnin >= length(nrun4()) ){ 
+  if(burnin >= length(ct_nrun4()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct4/10
   
   if(burnin>0){
-    run.afterB = run4()[-c(1:burnin)]
+    run.afterB = ct_run4()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run4()
+    run.afterB = ct_run4()
   }
   nrun.afterB = length(run.afterB)
   
@@ -716,15 +716,15 @@ output$plot4 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct4
-  if(burnin >= length(nrun4()) ){ 
+  if(burnin >= length(ct_nrun4()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct4/10
   
   if(burnin>0){
-    run.afterB = run4()[-c(1:burnin)]
+    run.afterB = ct_run4()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run4()
+    run.afterB = ct_run4()
   }
   nrun.afterB = length(run.afterB)
   
@@ -754,15 +754,15 @@ output$downloadct4 <-downloadHandler(
     
     # burn-thin
     burnin = input$Brnct4
-    if(burnin >= length(nrun4()) ){ 
+    if(burnin >= length(ct_nrun4()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct4/10
     
     if(burnin>0){
-      run.afterB = run4()[-c(1:burnin)]
+      run.afterB = ct_run4()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run4()
+      run.afterB = ct_run4()
     }
     nrun.afterB = length(run.afterB)
     
@@ -786,15 +786,15 @@ output$chisq4 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct4
-  if(burnin >= length(nrun4()) ){ 
+  if(burnin >= length(ct_nrun4()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct4/10
   
   if(burnin>0){
-    run.afterB = run4()[-c(1:burnin)]
+    run.afterB = ct_run4()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run4()
+    run.afterB = ct_run4()
   }
   nrun.afterB = length(run.afterB)
   
@@ -805,12 +805,12 @@ output$chisq4 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead4/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail4/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead4/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail4/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq4 <- chisq.test(rbind(table(set1),table(set2))) 
+  chisq4 <- chisq.test(rbind(table(ct_set1),table(ct_set2))) 
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq4$statistic,6), chisq4$p.value, chisq4$parameter)
@@ -825,15 +825,15 @@ output$sample5 <- renderText({
   
   # burn-thin
   burnin = input$Brnct5
-  if(burnin >= length(nrun5()) ){ 
+  if(burnin >= length(ct_nrun5()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct5/10
   
   if(burnin>0){
-    run.afterB = run5()[-c(1:burnin)]
+    run.afterB = ct_run5()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run5()
+    run.afterB = ct_run5()
   }
   nrun.afterB = length(run.afterB)
   
@@ -850,15 +850,15 @@ output$table5 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct5
-  if(burnin >= length(nrun5()) ){ 
+  if(burnin >= length(ct_nrun5()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct5/10
   
   if(burnin>0){
-    run.afterB = run5()[-c(1:burnin)]
+    run.afterB = ct_run5()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run5()
+    run.afterB = ct_run5()
   }
   nrun.afterB = length(run.afterB)
   
@@ -888,15 +888,15 @@ output$plot5 <- renderPlot({
   
   # burn-thin
   burnin = input$Brnct5
-  if(burnin >= length(nrun5()) ){ 
+  if(burnin >= length(ct_nrun5()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct5/10
   
   if(burnin>0){
-    run.afterB = run5()[-c(1:burnin)]
+    run.afterB = ct_run5()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run5()
+    run.afterB = ct_run5()
   }
   nrun.afterB = length(run.afterB)
   
@@ -926,15 +926,15 @@ output$downloadct5 <-downloadHandler(
     
     # burn-thin
     burnin = input$Brnct5
-    if(burnin >= length(nrun5()) ){ 
+    if(burnin >= length(ct_nrun5()) ){ 
       burnin = 0
     }
     thinning =  input$Thnct5/10
     
     if(burnin>0){
-      run.afterB = run5()[-c(1:burnin)]
+      run.afterB = ct_run5()[-c(1:burnin)]
     }else if(burnin==0){
-      run.afterB = run5()
+      run.afterB = ct_run5()
     }
     nrun.afterB = length(run.afterB)
     
@@ -958,15 +958,15 @@ output$chisq5 <- renderTable({
   
   # burn-thin
   burnin = input$Brnct5
-  if(burnin >= length(nrun5()) ){ 
+  if(burnin >= length(ct_nrun5()) ){ 
     burnin = 0
   }
   thinning =  input$Thnct5/10
   
   if(burnin>0){
-    run.afterB = run5()[-c(1:burnin)]
+    run.afterB = ct_run5()[-c(1:burnin)]
   }else if(burnin==0){
-    run.afterB = run5()
+    run.afterB = ct_run5()
   }
   nrun.afterB = length(run.afterB)
   
@@ -977,12 +977,12 @@ output$chisq5 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead5/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail5/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead5/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail5/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq5 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq5 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq5$statistic,6), chisq5$p.value, chisq5$parameter)
