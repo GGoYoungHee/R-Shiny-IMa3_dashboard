@@ -16,7 +16,6 @@ st <- tabPanel("Splitting times",value='st',
                 actionButton("st_load", "LOAD DATA")
             ),
             mainPanel(
-                
                 uiOutput("st")
         )
 ))

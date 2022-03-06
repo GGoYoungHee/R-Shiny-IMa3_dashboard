@@ -1,16 +1,25 @@
 ### install packages ###
-list.of.packages<-c('shiny','shinythemes','tidyverse','reticulate','shinyFiles','coda','dplyr','shinyWidgets','htmltools','data.table')
+list.of.packages<-c('shiny','shinythemes','tidyverse','reticulate','shinyFiles','coda','dplyr','shinyWidgets','htmltools','data.table','foreach','doParallel','parallel','bigstatsr')
 new.packages<-list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) {for (i in new.packages) {install.packages(i)}}
 
 ### library packages ###
 library(shiny)
 library(shinythemes)
-library(reticulate)
+library(reticulate) # python
+library(foreach)    # multicore
+library(doParallel) # multicore
+library(parallel)   # multicore
+library(bigstatsr)  # multicore
 
 ### Miniconda ###
 install_miniconda()
 py_install('pandas')
+
+### multi core ###
+multicore = detectCores() - 1 # 자신의 코어_doParallel 패키지 include
+cluster = makeCluster(spec = multicore) # 클러스터 제작.
+registerDoParallel(cl = cluster) # 클러스터 등록
 
 ### file load ###
 source("func.R")
@@ -63,4 +72,17 @@ server<-function(input,output,session){
   source("tabs/server/ct_server.R",local=T)
 }
 
+### RunApp ###
 shinyApp(ui,server)
+
+
+
+
+### Process END ###
+### Stop Cluster ###
+stopCluster(cluster)
+# 기존에 실행중인 클러스터를 종료시킴, 없으면 에러메세지 나오고 계속실행.
+# 문장 맨뒤에 넣고 실행시, 한번에 실행시킬때 중간에 프로세스가 종료됨.
+
+
+
