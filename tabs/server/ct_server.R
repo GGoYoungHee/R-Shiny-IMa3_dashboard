@@ -17,22 +17,22 @@ observe({shinyFileChoose(input, 'file1', roots=volumes, defaultPath='', defaultR
 
 ########################## ?꺆蹂꾨줈 媛? ?뜲?씠?꽣 吏?젙 ##########################
 
-ct_lst1 <- eventReactive(input$file1, 
+ct_file_list <- eventReactive(input$ct_file1, 
                       {req(input$Load!=0)
-                        ct_lst <- list( )
+                        lst <- list( )
                         file_selected<-parseFilePaths(volumes, input$file1)
                         for(i in 1:5){
-                          ct_lst[[i]] <- file_selected$datapath[i]
+                          lst[[i]] <- file_selected$datapath[i]
                         }
-                        ct_lst 
+                        lst 
                       })
 
 
 ##########################  ?뜲?씠?꽣 濡쒕뱶  ##########################
 
 ct_run1 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(ct_lst1()[[1]]))
+  req(!is.null(input$ct_file1) & input$Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[1]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
   ct_run1 = scan(text= pop1, what = " ")
@@ -45,8 +45,8 @@ ct_nrun1 <- reactive({
 })
 
 ct_run2 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(ct_lst1()[[2]]))
+  req(!is.null(input$ct_file1) & input$Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[2]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
   ct_run2 = scan(text= pop1, what = " ")
@@ -60,8 +60,8 @@ ct_nrun2 <- reactive({
 
 
 ct_run3 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(ct_lst1()[[3]]))
+  req(!is.null(input$ct_file1) & input$Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[3]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
   ct_run3 = scan(text= pop1, what = " ")
@@ -75,8 +75,8 @@ ct_nrun3 <- reactive({
 
 
 ct_run4 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(ct_lst1()[[4]]))
+  req(!is.null(input$ct_file1) & input$Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[4]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
   ct_run4 = scan(text= pop1, what = " ")
@@ -90,8 +90,8 @@ ct_nrun4 <- reactive({
 
 
 ct_run5 <- reactive({
-  req(!is.null(input$file1) & input$Load!=0)
-  pop1 <- popvals(as.character(ct_lst1()[[5]]))
+  req(!is.null(input$ct_file1) & input$Load!=0)
+  pop1 <- popvals(as.character(ct_file_list()[[5]]))
   
   # burn-thin ?쐞?빐 ?뜲?씠?꽣 ?쟾泥섎━
   ct_run5 = scan(text= pop1, what = " ")
@@ -110,10 +110,10 @@ observe({
   values <- reactiveValues(
     upload_state = NULL
   )
-  observeEvent(input$file1, {
+  observeEvent(input$ct_file1, {
     values$upload_state <- 'uploaded'
   })
-  file_selected<-reactive({parseFilePaths(volumes, input$file1)})
+  file_selected<-reactive({parseFilePaths(volumes, input$ct_file1)})
   output$summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })
@@ -996,10 +996,10 @@ observe({
   values <- reactiveValues(
     upload_state = NULL
   )
-  observeEvent(input$file1, {
+  observeEvent(input$ct_file1, {
     values$upload_state <- 'uploaded'
   })
-  file_selected<-reactive({parseFilePaths(volumes, input$file1)})
+  file_selected<-reactive({parseFilePaths(volumes, input$ct_file1)})
   output$summary <- renderText({
     return(paste(file_selected()$name,"\n"))
   })
