@@ -5,8 +5,6 @@ library(shinyFiles)
 library(reticulate)
 #install.packages("shinyWidgets")
 library(shinyWidgets)
-#install.packages("reshape")
-library(reshape)
 
 source_python('./tabs/server/writepop.py')
 
