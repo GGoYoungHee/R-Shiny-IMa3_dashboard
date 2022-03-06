@@ -1,7 +1,7 @@
 ### install packages ###
-list.of.packages<-c('shiny','shinythemes','tidyverse','reticulate','shinyFiles','coda','dplyr','shinyWidgets')
+list.of.packages<-c('shiny','shinythemes','tidyverse','reticulate','shinyFiles','coda','dplyr','shinyWidgets','htmltools','data.table')
 new.packages<-list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) {install.packages(new.packages)}
+if(length(new.packages)) {for (i in new.packages) {install.packages(i)}}
 
 ### library packages ###
 library(shiny)
@@ -12,15 +12,15 @@ library(reticulate)
 install_miniconda()
 py_install('pandas')
 
-
 ### file load ###
 source("func.R")
 source("tabs/ui/home_ui.R",local=T)
 source("tabs/ui/plot_ui.R",local=T)
 source("tabs/ui/bt_ui.R",local=T)
-source("tabs/ui/about_ui.R",local=T)
 source("tabs/ui/mcmc_ui.R",local=T)
+source("tabs/ui/splitting_times_ui.R",local=T)
 source("tabs/ui/ct_ui.R",local=T)
+source("tabs/ui/about_ui.R",local=T)
 
 #### Code ####
 ui<-fluidPage(
@@ -32,7 +32,7 @@ ui<-fluidPage(
                                          '.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, 
                                          .navbar-default .navbar-nav>.active>a:focus  {background-color: #11324D;}',
                                          '.btn-default {background-color: #11324D;}',
-                                         '.btn-default.active {background-color: #11324D;}',
+                                         '.btn-default.active {background-color: #11324D;}', 
                                          '.btn-default:focus, .btn-default.focus {background-color: #11324D;}',
                                          '.btn-default:hover {background-color: #11324D;}',
                                          '.btn-default:active:hover, .btn-default.active:hover, .open>.dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open>.dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open>.dropdown-toggle.btn-default.focus {background-color: #4B6587;}',
@@ -48,17 +48,19 @@ ui<-fluidPage(
                plot,
                bt,
                mcmc, # NEW CODE
+               st,
                ct,
                about
                #tabPanel("ABOUT US",value='about')
                ))
 
 server<-function(input,output,session){
- source("tabs/server/home_server.R",local=T)
- source("tabs/server/plot_server.R",local=T)
- source("tabs/server/bt_server.R",local=T)
- source("tabs/server/mcmc_server.R",local=T)
- source("tabs/server/ct_server.R",local=T)
+  source("tabs/server/home_server.R",local=T)
+  source("tabs/server/plot_server.R",local=T)
+  source("tabs/server/bt_server.R",local=T)
+  source("tabs/server/mcmc_server.R",local=T)
+  source("tabs/server/splitting_times_server.R",local=T)
+  source("tabs/server/ct_server.R",local=T)
 }
 
 shinyApp(ui,server)
