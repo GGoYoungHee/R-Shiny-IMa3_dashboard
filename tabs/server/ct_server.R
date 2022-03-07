@@ -268,12 +268,12 @@ output$chisq1 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead1/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail1/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead1/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail1/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq1 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq1 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq1$statistic,6), chisq1$p.value, chisq1$parameter)
@@ -441,12 +441,12 @@ output$chisq2 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead2/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail2/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead2/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail2/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq2 <-  chisq.test(rbind(table(set1),table(set2)))
+  chisq2 <-  chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq2$statistic,6), chisq2$p.value, chisq2$parameter)
@@ -615,12 +615,12 @@ output$chisq3 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead3/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail3/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead3/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail3/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq3 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq3 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq3$statistic,6), chisq3$p.value, chisq3$parameter)
@@ -788,12 +788,12 @@ output$chisq4 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead4/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail4/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead4/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail4/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq4 <- chisq.test(rbind(table(set1),table(set2))) 
+  chisq4 <- chisq.test(rbind(table(ct_set1),table(ct_set2))) 
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq4$statistic,6), chisq4$p.value, chisq4$parameter)
@@ -960,12 +960,12 @@ output$chisq5 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead5/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail5/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead5/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail5/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq5 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq5 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq5$statistic,6), chisq5$p.value, chisq5$parameter)
