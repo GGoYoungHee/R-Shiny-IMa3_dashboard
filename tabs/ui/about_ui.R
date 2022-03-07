@@ -21,7 +21,11 @@ about<-tabPanel("ABOUT",value='about',
                   column(10,
                          wellPanel(p(strong("Yujin Chung"),' - Project Leader ~~~~'),
                                    p(strong("YoungHee Go")," - Developing basic code, Making home and plot tab"),
-                                   p(strong("SuYoung Ko")," - Making burn & thin tab ~~~ ")
+                                   p(strong("SuYoung Ko")," - Making burn & thin tab ~~~ "),
+                                   p(strong("KaYeoung Kim")," - Editing ct tab & Debugging"),
+                                   p(strong("JaeHyung Jeong")," - Making MCMC tab, Editing splitting_times tabs, code optimization"),
+                                   p(strong("SuBin Kim")," - Making Splitting_times tab ~~~"),
+                                   p(strong("JiSu Lee")," - Making ct tab ~~~ "),
                                    )),
                   column(1)
                   ),
