@@ -1,41 +1,35 @@
-#server
-
 library(shinyFiles)
 library(shinyWidgets)
-
 
 source_python('./tabs/server/writepop.py')
 
 options(shiny.maxRequestSize=500*1024^2)
 
-
 observe({shinyFileChoose(input, 'ct_file', roots=volumes, defaultPath='', defaultRoot='wd')})
 
-
-########################## ???별로 ??? ????????? 지??? ##########################
+########################## ?꺆蹂꾨줈 媛? ?뜲?씠?꽣 吏?젙 ##########################
 
 ct_file_list <- eventReactive(input$ct_file, 
-                      {req(input$ct_Load!=0)
-                        lst <- list( )
-                        file_selected<-parseFilePaths(volumes, input$ct_file)
-                        for(i in 1:5){
-                          lst[[i]] <- file_selected$datapath[i]
-                        }
-                        lst 
-                      })
+                              {req(input$ct_Load!=0)
+                                lst <- list( )
+                                file_selected<-parseFilePaths(volumes, input$ct_file)
+                                for(i in 1:5){
+                                  lst[[i]] <- file_selected$datapath[i]
+                                }
+                                lst 
+                              })
 
 
-##########################  ????????? 로드  ##########################
+##########################  ?뜲?씠?꽣 濡쒕뱶  ##########################
 
 ct_run1 <- reactive({
   req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(ct_file_list()[[1]]))
-  
-  # burn-thin ?????? ????????? ???처리
   run1 = scan(text= pop1, what = " ")
   run1 = as.numeric(run1)
   run1
 })
+
 ct_nrun1 <- reactive({
   nrun1 = ct_run1()[1]
   nrun1
@@ -44,8 +38,6 @@ ct_nrun1 <- reactive({
 ct_run2 <- reactive({
   req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(ct_file_list()[[2]]))
-  
-  # burn-thin ?????? ????????? ???처리
   run2 = scan(text= pop1, what = " ")
   run2 = as.numeric(run2)
   run2
@@ -59,8 +51,6 @@ ct_nrun2 <- reactive({
 ct_run3 <- reactive({
   req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(ct_file_list()[[3]]))
-  
-  # burn-thin ?????? ????????? ???처리
   run3 = scan(text= pop1, what = " ")
   run3 = as.numeric(run3)
   run3
@@ -74,8 +64,6 @@ ct_nrun3 <- reactive({
 ct_run4 <- reactive({
   req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(ct_file_list()[[4]]))
-  
-  # burn-thin ?????? ????????? ???처리
   run4 = scan(text= pop1, what = " ")
   run4 = as.numeric(run4)
   run4
@@ -89,8 +77,6 @@ ct_nrun4 <- reactive({
 ct_run5 <- reactive({
   req(!is.null(input$ct_file) & input$ct_Load!=0)
   pop1 <- popvals(as.character(ct_file_list()[[5]]))
-  
-  # burn-thin ?????? ????????? ???처리
   run5 = scan(text= pop1, what = " ")
   run5 = as.numeric(run5)
   run5
@@ -122,7 +108,7 @@ observe({
 #samplesize
 
 output$sample1<- renderText({
-
+  
   burnin = input$Brnct1
   if(burnin >= length(ct_nrun1()) ){ 
     burnin = 0
@@ -169,13 +155,21 @@ output$table1 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  #df1 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  df1 <- data.frame(addmargins(cbind(table(run.afterBT),prop.table(table(run.afterBT)))))
-  colnames(df1) <- c("topology","ratio","sample size")
-  t(df1) 
-  },
-  bordered=T)
-  
+  df1_1 <- data.frame(addmargins(table(run.afterBT)))
+  df1_2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df1_1) <- c("topology","sample size")
+  colnames(df1_2) <- c("topology","ratio")
+  df1_3 <- merge(df1_1,df1_2,by='topology',all=T)
+  df1_4 <- as.data.frame(t(df1_3))
+  df1_4$columns <-c("toplogy","count","proportion")
+  df1_4 <- df1_4[,c(5,1,2,3,4)]
+  names(df1_4) <- c(df1_4[1,]) 
+  options(digits=6)
+  df1_4 <- df1_4[-1,]
+  df1_4
+},
+bordered=T)
+
 
 #plot
 output$plot1 <- renderPlot({
@@ -201,7 +195,7 @@ output$plot1 <- renderPlot({
     run.afterBT = run.afterB
   }
   nrun.afterBT= length(run.afterBT)
-
+  
   plot(run.afterBT~c(1:nrun.afterBT), xlab="iterations" , ylab = "Topology", yaxt="n", col="grey")
   yat=seq(0,2,by=1)
   axis(side=2,at=yat)
@@ -251,7 +245,7 @@ output$downloadct1 <-downloadHandler(
 
 #chisq
 output$chisq1 <- renderTable({
-
+  
   # burn-thin
   
   burnin = input$Brnct1
@@ -274,17 +268,17 @@ output$chisq1 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead1/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail1/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead1/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail1/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq1 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq1 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq1$statistic,6), chisq1$p.value, chisq1$parameter)
   cbind(name,t)
-  },striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
+},striped=T, bordered=T, hover=T, colnames=F, width="100%", spacing="l", align="c")
 
 ########################## ???번째 ?????????  ########################## 
 
@@ -310,7 +304,7 @@ output$sample2 <- renderText({
     run.afterBT = run.afterB
   }
   nrun.afterBT= length(run.afterBT)
-
+  
 })
 
 #table
@@ -335,14 +329,21 @@ output$table2 <- renderTable({
     run.afterBT = run.afterB
   }
   nrun.afterBT= length(run.afterBT)
+  df2_1 <- data.frame(addmargins(table(run.afterBT)))
+  df2_2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df2_1) <- c("topology","sample size")
+  colnames(df2_2) <- c("topology","ratio")
+  df2_3 <- merge(df2_1,df2_2,by='topology',all=T)
+  df2_4 <- as.data.frame(t(df2_3))
+  df2_4$columns <-c("toplogy","count","proportion")
+  df2_4 <- df2_4[,c(5,1,2,3,4)]
+  names(df2_4) <- c(df2_4[1,]) 
+  options(digits=6)
+  df2_4 <- df2_4[-1,]
+  df2_4
   
-  addmargins(prop.table(table(run.afterBT)))
-  
-  df2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df2) <- c("topology","ratio")
-  df2
 },
-  bordered=T)
+bordered=T)
 
 #plot
 output$plot2 <- renderPlot({
@@ -440,12 +441,12 @@ output$chisq2 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead2/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail2/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead2/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail2/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq2 <-  chisq.test(rbind(table(set1),table(set2)))
+  chisq2 <-  chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq2$statistic,6), chisq2$p.value, chisq2$parameter)
@@ -505,11 +506,18 @@ output$table3 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  addmargins(prop.table(table(run.afterBT)))
-  
-  df3 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df3) <- c("topology","ratio")
-  df3
+  df3_1 <- data.frame(addmargins(table(run.afterBT)))
+  df3_2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df3_1) <- c("topology","sample size")
+  colnames(df3_2) <- c("topology","ratio")
+  df3_3 <- merge(df3_1,df3_2,by='topology',all=T)
+  df3_4 <- as.data.frame(t(df3_3))
+  df3_4$columns <-c("toplogy","count","proportion")
+  df3_4 <- df3_4[,c(5,1,2,3,4)]
+  names(df3_4) <- c(df3_4[1,]) 
+  options(digits=6)
+  df3_4 <- df3_4[-1,]
+  df3_4
   
 }, bordered=T)
 
@@ -607,12 +615,12 @@ output$chisq3 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead3/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail3/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead3/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail3/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq3 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq3 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq3$statistic,6), chisq3$p.value, chisq3$parameter)
@@ -670,14 +678,21 @@ output$table4 <- renderTable({
     run.afterBT = run.afterB
   }
   nrun.afterBT= length(run.afterBT)
+  df4_1 <- data.frame(addmargins(table(run.afterBT)))
+  df4_2 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df4_1) <- c("topology","sample size")
+  colnames(df4_2) <- c("topology","ratio")
+  df4_3 <- merge(df4_1,df4_2,by='topology',all=T)
+  df4_4 <- as.data.frame(t(df4_3))
+  df4_4$columns <-c("toplogy","count","proportion")
+  df4_4 <- df4_4[,c(5,1,2,3,4)]
+  names(df4_4) <- c(df4_4[1,]) 
+  options(digits=6)
+  df4_4 <- df4_4[-1,]
+  df4_4
   
-  addmargins(prop.table(table(run.afterBT)))
-  
-  df4 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df4) <- c("topology","ratio")
-  df4
 },
-  bordered=T)
+bordered=T)
 
 #plot
 output$plot4 <- renderPlot({
@@ -773,12 +788,12 @@ output$chisq4 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead4/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail4/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead4/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail4/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq4 <- chisq.test(rbind(table(set1),table(set2))) 
+  chisq4 <- chisq.test(rbind(table(ct_set1),table(ct_set2))) 
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq4$statistic,6), chisq4$p.value, chisq4$parameter)
@@ -835,15 +850,21 @@ output$table5 <- renderTable({
   }else if(thinning==0){
     run.afterBT = run.afterB
   }
-  nrun.afterBT= length(run.afterBT)
+  df5_1 <- data.frame(addmargins(table(run.afterBT)))
+  df5_1 <- data.frame(addmargins(prop.table(table(run.afterBT))))
+  colnames(df5_1) <- c("topology","sample size")
+  colnames(df5_2) <- c("topology","ratio")
+  df5_3 <- merge(df5_1,df5_2,by='topology',all=T)
+  df5_4 <- as.data.frame(t(df5_3))
+  df5_4$columns <-c("toplogy","count","proportion")
+  df5_4 <- df5_4[,c(5,1,2,3,4)]
+  names(df5_4) <- c(df5_4[1,]) 
+  options(digits=6)
+  df5_4 <- df5_4[-1,]
+  df5_4
   
-  addmargins(prop.table(table(run.afterBT)))
-  
-  df5 <- data.frame(addmargins(prop.table(table(run.afterBT))))
-  colnames(df5) <- c("topology","ratio")
-  df5
 },
-  bordered=T)
+bordered=T)
 
 #plot
 output$plot5 <- renderPlot({
@@ -939,12 +960,12 @@ output$chisq5 <- renderTable({
   }
   nrun.afterBT= length(run.afterBT)
   
-  nset1 = round(nrun.afterBT*(input$chisqhead5/100))
-  nset2 = round(nrun.afterBT*(input$chisqtail5/100))
-  set1 = run.afterBT[1:nset1]
-  set2 = run.afterBT[(nrun.afterBT-nset2+1):nrun.afterBT]
+  ct_nset1 = round(nrun.afterBT*(input$chisqhead5/100))
+  ct_nset2 = round(nrun.afterBT*(input$chisqtail5/100))
+  ct_set1 = run.afterBT[1:ct_nset1]
+  ct_set2 = run.afterBT[(nrun.afterBT-ct_nset2+1):nrun.afterBT]
   
-  chisq5 <- chisq.test(rbind(table(set1),table(set2)))
+  chisq5 <- chisq.test(rbind(table(ct_set1),table(ct_set2)))
   
   name <- rbind("Test Statistic", "P-Value","Degrees Of Freedom" )
   t <- rbind(round(chisq5$statistic,6), chisq5$p.value, chisq5$parameter)
